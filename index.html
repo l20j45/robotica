@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portal del Curso de Robótica y Electrónica - Diapositivas, presentaciones y materiales de cada sesión.">
+    <title>Curso de Robótica & Electrónica 🤖⚡</title>
+    <style>
+        :root {
+            --bg-dark: #0f172a;
+            --card-bg: #1e293b;
+            --card-hover: #334155;
+            --accent-yellow: #fbbf24;
+            --accent-blue: #38bdf8;
+            --accent-green: #4ade80;
+            --accent-purple: #c084fc;
+            --accent-red: #f87171;
+            --text-main: #f8fafc;
+            --text-sub: #94a3b8;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Comic Sans MS', 'Chalkboard SE', 'Segoe UI', system-ui, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            width: 100%;
+            flex: 1;
+        }
+
+        header {
+            text-align: center;
+            padding: 3rem 2rem;
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            border-radius: 28px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+            margin-bottom: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(56, 189, 248, 0.1) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        .main-icon {
+            font-size: 4rem;
+            margin-bottom: 0.8rem;
+            animation: bounce 2s infinite ease-in-out;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            color: var(--accent-yellow);
+            margin-bottom: 0.6rem;
+            text-shadow: 0 4px 12px rgba(251, 191, 36, 0.2);
+        }
+
+        header p {
+            font-size: 1.3rem;
+            color: var(--accent-blue);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .sessions-section h2 {
+            font-size: 2rem;
+            color: var(--accent-yellow);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .grid-sessions {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.8rem;
+        }
+
+        .session-card {
+            background: var(--card-bg);
+            border-radius: 24px;
+            padding: 2rem;
+            border: 2px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .session-card.active {
+            border-color: var(--accent-blue);
+        }
+
+        .session-card.active:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 15px 30px rgba(56, 189, 248, 0.25);
+            border-color: var(--accent-yellow);
+        }
+
+        .session-card.disabled {
+            opacity: 0.65;
+            border-style: dashed;
+        }
+
+        .badge-status {
+            display: inline-block;
+            padding: 0.3rem 0.9rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            width: fit-content;
+            margin-bottom: 1rem;
+        }
+
+        .badge-available {
+            background: rgba(74, 222, 128, 0.2);
+            color: var(--accent-green);
+            border: 1px solid var(--accent-green);
+        }
+
+        .badge-upcoming {
+            background: rgba(148, 163, 184, 0.2);
+            color: var(--text-sub);
+            border: 1px solid var(--text-sub);
+        }
+
+        .session-card h3 {
+            font-size: 1.6rem;
+            color: var(--text-main);
+            margin-bottom: 0.8rem;
+        }
+
+        .session-card p {
+            font-size: 1.05rem;
+            color: var(--text-sub);
+            line-height: 1.5;
+            margin-bottom: 1.5rem;
+        }
+
+        .action-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+            padding: 0.8rem 1.4rem;
+            border-radius: 14px;
+            font-size: 1.05rem;
+            font-weight: bold;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--accent-yellow);
+            color: #0f172a;
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.02);
+            box-shadow: 0 5px 15px rgba(251, 191, 36, 0.4);
+        }
+
+        .btn-secondary {
+            background: rgba(56, 189, 248, 0.15);
+            color: var(--accent-blue);
+            border: 1px solid var(--accent-blue);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(56, 189, 248, 0.25);
+            box-shadow: 0 5px 15px rgba(56, 189, 248, 0.3);
+        }
+
+        footer {
+            margin-top: 4rem;
+            text-align: center;
+            padding: 1.5rem;
+            color: var(--text-sub);
+            font-size: 0.95rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <div class="main-icon">🤖⚡🛸</div>
+            <h1>Curso de Robótica & Electrónica</h1>
+            <p>Portal interactivo de clases, presentaciones y recursos multimedia.</p>
+        </header>
+
+        <main class="sessions-section">
+            <h2>📚 Sesiones del Curso</h2>
+            
+            <div class="grid-sessions">
+                
+                <!-- Sesión 1 (Disponible) -->
+                <article class="session-card active">
+                    <div>
+                        <span class="badge-status badge-available">Disponible</span>
+                        <h3>Sesión 01</h3>
+                        <h4 style="color: var(--accent-yellow); font-size: 1.2rem; margin-bottom: 0.8rem;">¿Qué es la Electricidad y la Robótica?</h4>
+                        <p>Introducción inspiradora, demostración con dron, cine-robot, conceptos de corriente eléctrica y la dinámica del Circuito Humano.</p>
+                    </div>
+                    <div class="action-buttons">
+                        <a href="sesion1/sesion1.html" class="btn btn-primary">
+                            🖥️ Ver Presentación (Diapositivas)
+                        </a>
+                        <a href="sesion1/linksSesion1.html" class="btn btn-secondary">
+                            🎥 Colección de Videos (linksSesion1)
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Sesión 2 (Próximamente) -->
+                <article class="session-card disabled">
+                    <div>
+                        <span class="badge-status badge-upcoming">Próximamente</span>
+                        <h3>Sesión 02</h3>
+                        <h4 style="color: var(--text-sub); font-size: 1.2rem; margin-bottom: 0.8rem;">Tu Primer Circuito Real</h4>
+                        <p>Uso de baterías, resistencias y LEDs para construir circuitos con luz y comprender la polaridad.</p>
+                    </div>
+                    <div class="action-buttons">
+                        <button disabled class="btn btn-secondary" style="opacity: 0.5; cursor: not-allowed;">
+                            🔒 En preparación
+                        </button>
+                    </div>
+                </article>
+
+                <!-- Sesión 3 (Próximamente) -->
+                <article class="session-card disabled">
+                    <div>
+                        <span class="badge-status badge-upcoming">Próximamente</span>
+                        <h3>Sesión 03</h3>
+                        <h4 style="color: var(--text-sub); font-size: 1.2rem; margin-bottom: 0.8rem;">Motores y Movimiento</h4>
+                        <p>Cómo convertir la energía eléctrica en movimiento mecánico para dar vida a prototipos dinámicos.</p>
+                    </div>
+                    <div class="action-buttons">
+                        <button disabled class="btn btn-secondary" style="opacity: 0.5; cursor: not-allowed;">
+                            🔒 En preparación
+                        </button>
+                    </div>
+                </article>
+
+            </div>
+        </main>
+
+        <footer>
+            <p>🤖 Curso de Robótica - Desarrollado para impartir clases interactivas | Alojado en GitHub Pages</p>
+        </footer>
+    </div>
+
+</body>
+</html>
