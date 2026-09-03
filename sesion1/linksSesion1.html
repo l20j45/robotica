@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sesión 1 - Colección de Links y Videos de Robótica</title>
+    <style>
+        :root {
+            --bg-dark: #0f172a;
+            --card-bg: #1e293b;
+            --card-hover: #334155;
+            --accent-yellow: #fbbf24;
+            --accent-blue: #38bdf8;
+            --accent-green: #4ade80;
+            --accent-purple: #c084fc;
+            --accent-red: #f87171;
+            --text-main: #f8fafc;
+            --text-sub: #94a3b8;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Comic Sans MS', 'Chalkboard SE', 'Segoe UI', system-ui, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            padding: 2rem 1rem;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+            padding: 2rem;
+            background: var(--card-bg);
+            border-radius: 24px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            color: var(--accent-yellow);
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            color: var(--accent-blue);
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1.2rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--accent-yellow);
+            color: #0f172a;
+            padding: 0.6rem 1.4rem;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1rem;
+            transition: all 0.2s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(251, 191, 36, 0.4);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--accent-blue);
+            border: 2px solid var(--accent-blue);
+        }
+
+        .btn-outline:hover {
+            background: rgba(56, 189, 248, 0.15);
+            box-shadow: 0 5px 15px rgba(56, 189, 248, 0.3);
+        }
+
+        .section-block {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 1.8rem;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.2rem;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 0.8rem;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            color: var(--accent-yellow);
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .slide-tag {
+            background: rgba(192, 132, 252, 0.2);
+            color: var(--accent-purple);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+
+        .grid-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.2rem;
+        }
+
+        .video-card {
+            background: rgba(255, 255, 255, 0.04);
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.2s ease, border-color 0.2s ease;
+        }
+
+        .video-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--accent-blue);
+        }
+
+        .video-embed-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 0;
+            overflow: hidden;
+            background: #000;
+        }
+
+        .video-embed-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        .card-body {
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            flex: 1;
+        }
+
+        .card-type {
+            display: inline-block;
+            font-size: 0.8rem;
+            font-weight: bold;
+            padding: 0.25rem 0.6rem;
+            border-radius: 8px;
+            text-transform: uppercase;
+            width: fit-content;
+        }
+
+        .type-video {
+            background: rgba(74, 222, 128, 0.2);
+            color: var(--accent-green);
+        }
+
+        .type-short {
+            background: rgba(248, 113, 113, 0.2);
+            color: var(--accent-red);
+        }
+
+        .link-text {
+            font-size: 0.95rem;
+            word-break: break-all;
+            color: var(--accent-blue);
+            text-decoration: none;
+        }
+
+        .link-text:hover {
+            text-decoration: underline;
+        }
+
+        .card-actions {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: auto;
+        }
+
+        .btn-sm {
+            padding: 0.4rem 0.8rem;
+            font-size: 0.85rem;
+            border-radius: 8px;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--accent-green);
+            color: #0f172a;
+            padding: 0.8rem 1.5rem;
+            border-radius: 12px;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>🤖 linksSesion1 - Recursos de Robótica</h1>
+            <p>Lista interactiva de videos para proyectar y revisar en la Sesión 1</p>
+            <div class="nav-links">
+                <a href="sesion1.html" class="btn">◀ Volver a la Presentación (sesion1.html)</a>
+                <button class="btn btn-outline" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">⬆ Inicio</button>
+            </div>
+        </header>
+
+        <!-- 1. Robots Chinos -->
+        <div class="section-block" id="robots-chinos">
+            <div class="section-header">
+                <h2 class="section-title">🇨🇳 Robots Chinos</h2>
+                <span class="slide-tag">📍 Slide 4: Videos de Robots</span>
+            </div>
+            <div class="grid-cards">
+
+                <!-- Link 1 -->
+                <div class="video-card">
+                    <div class="video-embed-container">
+                        <iframe src="https://www.youtube.com/embed/BF4HGmgCkuc" title="Robot Chino 1" allowfullscreen loading="lazy"></iframe>
+                    </div>
+                    <div class="card-body">
+                        <span class="card-type type-video">YouTube Video</span>
+                        <a href="https://www.youtube.com/watch?v=BF4HGmgCkuc" target="_blank" class="link-text">https://www.youtube.com/watch?v=BF4HGmgCkuc</a>
+                        <div class="card-actions">
+                            <a href="https://www.youtube.com/watch?v=BF4HGmgCkuc" target="_blank" class="btn btn-sm">▶ Abrir en YouTube</a>
+                            <button class="btn btn-outline btn-sm" onclick="copyLink('https://www.youtube.com/watch?v=BF4HGmgCkuc')">📋 Copiar</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Link 2 -->
+                <div class="video-card">
+                    <div class="video-embed-container">
+                        <iframe src="https://www.youtube.com/embed/8DeWTOm6AfA" title="Robot Chino 2 Short" allowfullscreen loading="lazy"></iframe>
+                    </div>
+                    <div class="card-body">
+                        <span class="card-type type-short">YouTube Short</span>
+                        <a href="https://www.youtube.com/shorts/8DeWTOm6AfA" target="_blank" class="link-text">https://www.youtube.com/shorts/8DeWTOm6AfA</a>
+                        <div class="card-actions">
+                            <a href="https://www.youtube.com/shorts/8DeWTOm6AfA" target="_blank" class="btn btn-sm">▶ Abrir en YouTube</a>
+                            <button class="btn btn-outline btn-sm" onclick="copyLink('https://www.youtube.com/shorts/8DeWTOm6AfA')">📋 Copiar</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Link 3 -->
+                <div class="video-card">
+                    <div class="video-embed-container">
+                        <iframe src="https://www.youtube.com/embed/_Why-XmvgSc" title="Robot Chino 3" allowfullscreen loading="lazy"></iframe>
+                    </div>
+                    <div class="card-body">
+                        <span class="card-type type-video">YouTube Video</span>
+                        <a href="https://www.youtube.com/watch?v=_Why-XmvgSc" target="_blank" class="link-text">https://www.youtube.com/watch?v=_Why-XmvgSc</a>
+                        <div class="card-actions">
+                            <a href="https://www.youtube.com/watch?v=_Why-XmvgSc" target="_blank" class="btn btn-sm">▶ Abrir en YouTube</a>
+                            <button class="btn btn-outline btn-sm" onclick="copyLink('https://www.youtube.com/watch?v=_Why-XmvgSc')">📋 Copiar</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Link 4 -->
+                <div class="video-card">
+                    <div class="video-embed-container">
+                        <iframe src="https://www.youtube.com/embed/Lxw79FQfncw" title="Robot Chino 4" allowfullscreen loading="lazy"></iframe>
+                    </div>
+                    <div class="card-body">
+                        <span class="card-type type-video">YouTube Video</span>
+                        <a href="https://www.youtube.com/watch?v=Lxw79FQfncw" target="_blank" class="link-text">https://www.youtube.com/watch?v=Lxw79FQfncw</a>
+                        <div class="card-actions">
+                            <a href="https://www.youtube.com/watch?v=Lxw79FQfncw" target="_blank" class="btn btn-sm">▶ Abrir en YouTube</a>
+                            <button class="btn btn-outline btn-sm" onclick="copyLink('https://www.youtube.com/watch?v=Lxw79FQfncw')">📋 Copiar</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Link 5 -->
+                <div class="video-card">
+                    <div class="video-embed-container">
+                        <iframe src="https://www.youtube.com/embed/Si4GlwC5sIQ" title="Robot Chino 5 Short" allowfullscreen loading="lazy"></iframe>
+                    </div>
+                    <div class="card-body">
+                        <span class="card-type type-short">YouTube Short</span>
+                        <a href="https://www.youtube.com/shorts/Si4GlwC5sIQ" target="_blank" class="link-text">https://www.youtube.com/shorts/Si4GlwC5sIQ</a>
+                        <div class="card-actions">
+                            <a href="https://www.youtube.com/shorts/Si4GlwC5sIQ" target="_blank" class="btn btn-sm">▶ Abrir en YouTube</a>
+                            <button class="btn btn-outline btn-sm" onclick="copyLink('https://www.youtube.com/shorts/Si4GlwC5sIQ')">📋 Copiar</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- 2. Varios Robots -->
+        <div class="section-block" id="varios-robots">
+            <div class="section-header">
+                <h2 class="section-title">🤖 Varios Robots</h2>
+                <span class="slide-tag">📍 Slide 4: Cine-Robot</span>
+            </div>
+            <div class="grid-cards">
+                <div class="video-card">
+                    <div class="video-embed-container">
+                        <iframe src="https://www.youtube.com/embed/jZ6wCAIvMFA" title="Varios Robots" allowfullscreen loading="lazy"></iframe>
+                    </div>
+                    <div class="card-body">
+                        <span class="card-type type-video">YouTube Video</span>
+                        <a href="https://www.youtube.com/watch?v=jZ6wCAIvMFA" target="_blank" class="link-text">https://www.youtube.com/watch?v=jZ6wCAIvMFA</a>
+                        <div class="card-actions">
+                            <a href="https://www.youtube.com/watch?v=jZ6wCAIvMFA" target="_blank" class="btn btn-sm">▶ Abrir en YouTube</a>
+                            <button class="btn btn-outline btn-sm" onclick="copyLink('https://www.youtube.com/watch?v=jZ6wCAIvMFA')">📋 Copiar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. Helix -->
+        <div class="section-block" id="helix">
+            <div class="section-header">
+                <h2 class="section-title">🧬 Helix</h2>
+                <span class="slide-tag">📍 Slide 4: Robots Especiales</span>
+            </div>
+            <div class="grid-cards">
+                <div class="video-card">
+                    <div class="video-embed-container">
+                        <iframe src="https://www.youtube.com/embed/Z3yQHYNXPws" title="Robot Helix" allowfullscreen loading="lazy"></iframe>
+                    </div>
+                    <div class="card-body">
+                        <span class="card-type type-video">YouTube Video</span>
+                        <a href="https://www.youtube.com/watch?v=Z3yQHYNXPws" target="_blank" class="link-text">https://www.youtube.com/watch?v=Z3yQHYNXPws</a>
+                        <div class="card-actions">
+                            <a href="https://www.youtube.com/watch?v=Z3yQHYNXPws" target="_blank" class="btn btn-sm">▶ Abrir en YouTube</a>
+                            <button class="btn btn-outline btn-sm" onclick="copyLink('https://www.youtube.com/watch?v=Z3yQHYNXPws')">📋 Copiar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. Qué Haremos Nosotros -->
+        <div class="section-block" id="que-haremos-nosotros">
+            <div class="section-header">
+                <h2 class="section-title">🛠️ Qué Haremos Nosotros</h2>
+                <span class="slide-tag">📍 Slide 8 & Proyectos Prácticos</span>
+            </div>
+            <div class="grid-cards">
+
+                <!-- Link 1 -->
+                <div class="video-card">
+                    <div class="video-embed-container">
+                        <iframe src="https://www.youtube.com/embed/TebpNuDS-Ko" title="Proyecto 1" allowfullscreen loading="lazy"></iframe>
+                    </div>
+                    <div class="card-body">
+                        <span class="card-type type-video">YouTube Video</span>
+                        <a href="https://www.youtube.com/watch?v=TebpNuDS-Ko" target="_blank" class="link-text">https://www.youtube.com/watch?v=TebpNuDS-Ko</a>
+                        <div class="card-actions">
+                            <a href="https://www.youtube.com/watch?v=TebpNuDS-Ko" target="_blank" class="btn btn-sm">▶ Abrir en YouTube</a>
+                            <button class="btn btn-outline btn-sm" onclick="copyLink('https://www.youtube.com/watch?v=TebpNuDS-Ko')">📋 Copiar</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Link 2 -->
+                <div class="video-card">
+                    <div class="video-embed-container">
+                        <iframe src="https://www.youtube.com/embed/MXKEiJg0tlQ" title="Proyecto Short" allowfullscreen loading="lazy"></iframe>
+                    </div>
+                    <div class="card-body">
+                        <span class="card-type type-short">YouTube Short</span>
+                        <a href="https://www.youtube.com/shorts/MXKEiJg0tlQ" target="_blank" class="link-text">https://www.youtube.com/shorts/MXKEiJg0tlQ</a>
+                        <div class="card-actions">
+                            <a href="https://www.youtube.com/shorts/MXKEiJg0tlQ" target="_blank" class="btn btn-sm">▶ Abrir en YouTube</a>
+                            <button class="btn btn-outline btn-sm" onclick="copyLink('https://www.youtube.com/shorts/MXKEiJg0tlQ')">📋 Copiar</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Link 3 -->
+                <div class="video-card">
+                    <div class="video-embed-container">
+                        <iframe src="https://www.youtube.com/embed/S8iHuSk3fMY" title="Proyecto 3" allowfullscreen loading="lazy"></iframe>
+                    </div>
+                    <div class="card-body">
+                        <span class="card-type type-video">YouTube Video</span>
+                        <a href="https://www.youtube.com/watch?v=S8iHuSk3fMY" target="_blank" class="link-text">https://www.youtube.com/watch?v=S8iHuSk3fMY</a>
+                        <div class="card-actions">
+                            <a href="https://www.youtube.com/watch?v=S8iHuSk3fMY" target="_blank" class="btn btn-sm">▶ Abrir en YouTube</a>
+                            <button class="btn btn-outline btn-sm" onclick="copyLink('https://www.youtube.com/watch?v=S8iHuSk3fMY')">📋 Copiar</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Link 4 -->
+                <div class="video-card">
+                    <div class="video-embed-container">
+                        <iframe src="https://www.youtube.com/embed/NZt_MXZc_aQ" title="Proyecto 4" allowfullscreen loading="lazy"></iframe>
+                    </div>
+                    <div class="card-body">
+                        <span class="card-type type-video">YouTube Video</span>
+                        <a href="https://www.youtube.com/watch?v=NZt_MXZc_aQ" target="_blank" class="link-text">https://www.youtube.com/watch?v=NZt_MXZc_aQ</a>
+                        <div class="card-actions">
+                            <a href="https://www.youtube.com/watch?v=NZt_MXZc_aQ" target="_blank" class="btn btn-sm">▶ Abrir en YouTube</a>
+                            <button class="btn btn-outline btn-sm" onclick="copyLink('https://www.youtube.com/watch?v=NZt_MXZc_aQ')">📋 Copiar</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- 5. Robots Drones -->
+        <div class="section-block" id="robots-drones">
+            <div class="section-header">
+                <h2 class="section-title">🛸 Robots Drones</h2>
+                <span class="slide-tag">📍 Slide 3: Demostración del Dron</span>
+            </div>
+            <div class="grid-cards">
+
+                <!-- Link 1 -->
+                <div class="video-card">
+                    <div class="video-embed-container">
+                        <iframe src="https://www.youtube.com/embed/aOd4-T_p5fA" title="Dron 1" allowfullscreen loading="lazy"></iframe>
+                    </div>
+                    <div class="card-body">
+                        <span class="card-type type-video">YouTube Video</span>
+                        <a href="https://www.youtube.com/watch?v=aOd4-T_p5fA" target="_blank" class="link-text">https://www.youtube.com/watch?v=aOd4-T_p5fA</a>
+                        <div class="card-actions">
+                            <a href="https://www.youtube.com/watch?v=aOd4-T_p5fA" target="_blank" class="btn btn-sm">▶ Abrir en YouTube</a>
+                            <button class="btn btn-outline btn-sm" onclick="copyLink('https://www.youtube.com/watch?v=aOd4-T_p5fA')">📋 Copiar</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Link 2 -->
+                <div class="video-card">
+                    <div class="video-embed-container">
+                        <iframe src="https://www.youtube.com/embed/NUJYui_uAJ4" title="Dron 2" allowfullscreen loading="lazy"></iframe>
+                    </div>
+                    <div class="card-body">
+                        <span class="card-type type-video">YouTube Video</span>
+                        <a href="https://www.youtube.com/watch?v=NUJYui_uAJ4" target="_blank" class="link-text">https://www.youtube.com/watch?v=NUJYui_uAJ4</a>
+                        <div class="card-actions">
+                            <a href="https://www.youtube.com/watch?v=NUJYui_uAJ4" target="_blank" class="btn btn-sm">▶ Abrir en YouTube</a>
+                            <button class="btn btn-outline btn-sm" onclick="copyLink('https://www.youtube.com/watch?v=NUJYui_uAJ4')">📋 Copiar</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <div class="toast" id="toast">¡Enlace copiado al portapapeles!</div>
+
+    <script>
+        function copyLink(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                const toast = document.getElementById('toast');
+                toast.classList.add('show');
+                setTimeout(() => {
+                    toast.classList.remove('show');
+                }, 2000);
+            }).catch(err => {
+                console.error('Error al copiar: ', err);
+            });
+        }
+    </script>
+</body>
+</html>
