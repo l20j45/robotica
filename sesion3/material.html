@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Material Imprimible - Sesión 03</title>
+    <style>
+        @page { size: letter portrait; margin: 1.2cm; }
+        * { box-sizing: border-box; font-family: 'Segoe UI', Arial, sans-serif; }
+        body { background: #f8fafc; color: #0f172a; margin: 0; }
+        
+        .page {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto 2rem auto;
+            background: #ffffff;
+            padding: 2rem;
+            border-radius: 12px;
+            border: 2px dashed #cbd5e1;
+            page-break-after: always;
+        }
+
+        h1 { font-size: 1.6rem; color: #1e3a8a; text-align: center; margin-bottom: 0.2rem; text-transform: uppercase; }
+        .subtitle { text-align: center; font-weight: bold; color: #475569; margin-bottom: 1rem; }
+        .info-box { border: 1px solid #cbd5e1; padding: 0.6rem 1rem; border-radius: 8px; margin-bottom: 1rem; display: flex; justify-content: space-between; font-size: 0.9rem; }
+
+        .group-card { border-radius: 12px; padding: 1.2rem; margin-bottom: 1rem; }
+        .g1-border { border: 3px solid #f59e0b; background: #fffbeb; }
+        .g2-border { border: 3px solid #10b981; background: #ecfdf5; }
+        .g3-border { border: 3px solid #8b5cf6; background: #f5f3ff; }
+
+        pre.code-box { background: #0f172a; color: #38bdf8; padding: 1rem; border-radius: 8px; font-family: monospace; font-size: 0.85rem; }
+
+        @media print {
+            body { background: white; }
+            .page { border: none; padding: 0; margin: 0; width: 100%; max-width: 100%; page-break-after: always; }
+            .no-print { display: none; }
+        }
+
+        .print-btn { display: block; width: 200px; margin: 1rem auto; padding: 0.8rem; background: #2563eb; color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; text-align: center; }
+    </style>
+</head>
+<body>
+
+    <button class="print-btn no-print" onclick="window.print()">🖨️ Imprimir Fichas</button>
+
+    <!-- FICHA 1: 6 Y 7 AÑOS -->
+    <div class="page">
+        <h1>🤖 Taller de Robótica Escolar</h1>
+        <div class="subtitle">Sesión 03: El Botón y el Puente Levadizo (6 y 7 Años)</div>
+        <div class="info-box">
+            <span><strong>Alumno:</strong> ___________________________________</span>
+            <span><strong>Grupo:</strong> 6 - 7 años</span>
+        </div>
+
+        <div class="group-card g1-border">
+            <h3>🌉 1. ¡Dibuja el Puente Levadizo!</h3>
+            <p>Dibuja el puente <strong>CERRADO (abajo)</strong> cuando presionas el botón para que la energía pueda pasar al LED:</p>
+            <div style="text-align: center; font-size: 2.5rem; margin: 1.5rem 0;">
+                [Batería +] ─── \ ─── [LED 💡] <br>
+                <small style="font-size: 1rem;">(Dibuja la línea recta uniendo los dos lados)</small>
+            </div>
+        </div>
+
+        <div class="group-card g1-border" style="text-align: center;">
+            <h3>🛎️ 2. El Timbre de la Casa</h3>
+            <p>Colorea el botón de <strong>ROJO</strong> y el LED del color que encenderá tu timbre.</p>
+            <div style="font-size: 3rem; margin: 1rem;">🔘 ➔ 💡</div>
+        </div>
+    </div>
+
+    <!-- FICHA 2: 8 Y 9 AÑOS -->
+    <div class="page">
+        <h1>🤖 Taller de Robótica Escolar</h1>
+        <div class="subtitle">Sesión 03: Telégrafo y Clave Morse (8 y 9 Años)</div>
+        <div class="info-box">
+            <span><strong>Alumno:</strong> ___________________________________</span>
+            <span><strong>Grupo:</strong> 8 - 9 años</span>
+        </div>
+
+        <div class="group-card g2-border">
+            <h3>📡 1. Tabla de Clave Morse Básica</h3>
+            <p>Usa tu circuito con pulsador para emitir los siguientes códigos luminosos:</p>
+            <ul>
+                <li><strong>Letra S (SOS):</strong> • • • (3 clics cortos)</li>
+                <li><strong>Letra O (SOS):</strong> ─── ─── ─── (3 clics largos)</li>
+                <li><strong>Letra A:</strong> • ─── (1 corto, 1 largo)</li>
+            </ul>
+        </div>
+
+        <div class="group-card g2-border">
+            <h3>✏️ 2. Descifra el Mensaje Secreto</h3>
+            <p>Prueba emitir con tu botón la secuencia: <strong>• • • / ─── ─── ─── / • • •</strong></p>
+            <p>¿Qué mensaje de auxilio internacional acabas de enviar? ________________________</p>
+        </div>
+    </div>
+
+    <!-- FICHA 3: 10 Y 11 AÑOS -->
+    <div class="page">
+        <h1>🤖 Guía de Ingeniería Práctica</h1>
+        <div class="subtitle">Sesión 03: Lógica Booleana con Botones (10 y 11 Años)</div>
+        <div class="info-box">
+            <span><strong>Alumno:</strong> ___________________________________</span>
+            <span><strong>Grupo:</strong> 10 - 11 años</span>
+        </div>
+
+        <div class="group-card g3-border">
+            <h3>🧩 1. Esquemas de Conexión</h3>
+            <p>Analiza y dibuja en tu libreta las dos configuraciones:</p>
+            <pre class="code-box">
+CONFIGURACIÓN SERIE (AND):
++ ─── [ Push 1 ] ─── [ Push 2 ] ─── [ Resistencia ] ─── [ LED ] ─── -
+(Requiere presionar AMBOS botones a la vez para encender)
+
+CONFIGURACIÓN PARALELO (OR):
+      ┌── [ Push 1 ] ──┐
++ ────┼────────────────┼─── [ Resistencia ] ─── [ LED ] ─── -
+      └── [ Push 2 ] ──┘
+(Cualquiera de los dos botones que presiones encenderá el LED)
+            </pre>
+        </div>
+
+        <div class="group-card g3-border">
+            <h3>📝 2. Aplicación Real</h3>
+            <p>¿En qué aparato real de la vida cotidiana se usa la configuración <strong>PARALELO (OR)</strong> donde dos botones diferentes pueden encender la misma luz?</p>
+            <p style="border-bottom: 1px solid #8b5cf6; margin-top: 2rem;"></p>
+        </div>
+    </div>
+
+</body>
+</html>

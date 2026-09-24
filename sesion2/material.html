@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Material Imprimible - Sesión 02</title>
+    <style>
+        @page {
+            size: letter portrait;
+            margin: 1.5cm;
+        }
+
+        * {
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f8fafc;
+            color: #0f172a;
+            margin: 0;
+            padding: 0;
+        }
+
+        .page {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto 2rem auto;
+            background: #ffffff;
+            padding: 2.5rem;
+            border-radius: 12px;
+            border: 2px dashed #cbd5e1;
+            page-break-after: always;
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            color: #1e3a8a;
+            text-align: center;
+            margin-bottom: 0.2rem;
+            text-transform: uppercase;
+        }
+
+        .subtitle {
+            text-align: center;
+            font-weight: bold;
+            color: #475569;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .info-box {
+            border: 1px solid #cbd5e1;
+            padding: 0.8rem 1.2rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.95rem;
+        }
+
+        /* Seccion Niños Pequeños */
+        .kid-section {
+            border: 3px solid #f59e0b;
+            border-radius: 16px;
+            padding: 1.5rem;
+            background: #fffbeb;
+            margin-bottom: 1.5rem;
+        }
+
+        .kid-title {
+            color: #d97706;
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 0.8rem;
+        }
+
+        .drawing-grid {
+            display: flex;
+            justify-content: space-around;
+            text-align: center;
+            margin: 1.5rem 0;
+        }
+
+        .component-card {
+            border: 2px solid #cbd5e1;
+            border-radius: 12px;
+            padding: 1rem;
+            width: 30%;
+            background: white;
+        }
+
+        .component-shape {
+            height: 70px;
+            border: 2px dashed #94a3b8;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+        }
+
+        .led-target {
+            width: 160px;
+            height: 160px;
+            border: 3px dashed #f59e0b;
+            border-radius: 50%;
+            margin: 1rem auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #ffffff;
+            font-size: 2.5rem;
+        }
+
+        /* Seccion Mayores */
+        .older-section {
+            border: 2px solid #2563eb;
+            border-radius: 12px;
+            padding: 1.5rem;
+            background: #eff6ff;
+            margin-bottom: 1.5rem;
+        }
+
+        .older-title {
+            color: #1d4ed8;
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 0.8rem;
+        }
+
+        pre.diagram {
+            background: #0f172a;
+            color: #38bdf8;
+            padding: 1.2rem;
+            border-radius: 8px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.95rem;
+            line-height: 1.4;
+            overflow-x: auto;
+        }
+
+        ol, ul {
+            line-height: 1.6;
+            margin-left: 1.2rem;
+        }
+
+        /* Formato de impresión sin basuras de interfaz */
+        @media print {
+            body { background: white; }
+            .page {
+                border: none;
+                padding: 0;
+                margin: 0;
+                width: 100%;
+                max-width: 100%;
+                page-break-after: always;
+            }
+            .no-print { display: none; }
+        }
+
+        .print-btn {
+            display: block;
+            width: 200px;
+            margin: 1.5rem auto;
+            padding: 0.8rem 1.5rem;
+            background: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <button class="print-btn no-print" onclick="window.print()">🖨️ Imprimir Hojas</button>
+
+    <!-- HOJA 1: NIÑOS PEQUEÑOS (6 a 9 años) -->
+    <div class="page">
+        <h1>🤖 Taller de Robótica Escolar</h1>
+        <div class="subtitle">Sesión 02: Mi Primer Circuito de Luz 💡</div>
+
+        <div class="info-box">
+            <span><strong>Alumno:</strong> ___________________________________</span>
+            <span><strong>Fecha:</strong> ____________</span>
+        </div>
+
+        <div class="kid-section">
+            <div class="kid-title">1. 🖍️ Colorea a los 3 amigos del circuito:</div>
+            <div class="drawing-grid">
+                <div class="component-card">
+                    <div class="component-shape">🔋</div>
+                    <strong>Batería</strong><br><small>(Amarillo)</small>
+                </div>
+                <div class="component-card">
+                    <div class="component-shape">⚡</div>
+                    <strong>Resistencia</strong><br><small>(Azul)</small>
+                </div>
+                <div class="component-card">
+                    <div class="component-shape">💡</div>
+                    <strong>Foco LED</strong><br><small>(Tu color favorito)</small>
+                </div>
+            </div>
+        </div>
+
+        <div class="kid-section">
+            <div class="kid-title">2. 🔴 Traza el camino de la energía:</div>
+            <p>Con tu <strong>crayola roja</strong>, sigue el camino del (+) y con la <strong>negra</strong> el camino del (-):</p>
+            <p style="font-family: monospace; font-size: 1.1rem; text-align: center; margin: 1.5rem 0;">
+                [ Batería + ] ────────> [ Resistencia ] ────────> [ Pata Larga + ]<br><br>
+                [ Batería - ] ──────────────────────────────────> [ Pata Corta - ]
+            </p>
+        </div>
+
+        <div class="kid-section" style="text-align: center;">
+            <div class="kid-title">3. 😊 Dibuja una carita feliz a tu LED encendido:</div>
+            <div class="led-target">💡</div>
+            <p><strong>¡Recuerda!</strong> La pata larga siempre va conectada al cable rojo (+).</p>
+        </div>
+    </div>
+
+
+    <!-- HOJA 2: NIÑOS MAYORES (9 a 13 años) -->
+    <div class="page">
+        <h1>🤖 Guía Técnica de Ingeniería</h1>
+        <div class="subtitle">Sesión 02: Circuito Elemental y Polaridad</div>
+
+        <div class="info-box">
+            <span><strong>Alumno:</strong> ___________________________________</span>
+            <span><strong>Fecha:</strong> ____________</span>
+        </div>
+
+        <div class="older-section">
+            <div class="older-title">1. 📝 Apuntes y Conceptos Clave (Copiar en libreta)</div>
+            <ol>
+                <li><strong>Circuito Cerrado:</strong> Trayectoria continua que permite el flujo constante de electrones desde el polo positivo (+) al polo negativo (-).</li>
+                <li><strong>Polaridad del LED:</strong>
+                    <ul>
+                        <li><strong>Ánodo (+):</strong> Terminal larga ------> Conectar a voltaje positivo.</li>
+                        <li><strong>Cátodo (-):</strong> Terminal corta ------> Conectar a tierra / negativo.</li>
+                    </ul>
+                </li>
+                <li><strong>Resistencia de Protección (220 Ω):</strong> Limita la corriente eléctrica para evitar sobrecalentamiento y choque térmico en el diodo semiconductor.</li>
+            </ol>
+        </div>
+
+        <div class="older-section">
+            <div class="older-title">2. ✏️ Diagrama Esquemático Estándar (Copiar con regla)</div>
+            <pre class="diagram">
+     + ──────────[ Batería 3V ]────────── -
+     │                                    │
+    ┌┴┐                                   │
+    │ │ Resistencia                       │
+    └┬┘ 220 Ohms                          │
+     │                                    │
+     ├───┐ Ánodo (+)                      │
+     │  ───                               │
+     │  \ /  Diodo LED                    │
+     │ ───V───                            │
+     │   │ Cátodo (-)                     │
+     └───┴────────────────────────────────┘
+            </pre>
+        </div>
+
+        <div class="older-section">
+            <div class="older-title">3. 🔍 Análisis de Troubleshooting (Diagnóstico de Fallas)</div>
+            <p><strong>Pregunta:</strong> ¿Qué ocurre si se conecta el LED con la polaridad invertida?</p>
+            <p style="border-bottom: 1px solid #94a3b8; margin-top: 1.5rem;"></p>
+            <p><strong>Pregunta:</strong> ¿Por qué no debemos conectar el LED directamente a la batería sin la resistencia?</p>
+            <p style="border-bottom: 1px solid #94a3b8; margin-top: 1.5rem;"></p>
+        </div>
+    </div>
+
+</body>
+</html>

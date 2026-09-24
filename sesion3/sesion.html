@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sesión 3: Interruptores y Pulsadores</title>
+    <style>
+        :root {
+            --bg-dark: #0f172a;
+            --card-bg: #1e293b;
+            --accent-yellow: #fbbf24;
+            --accent-blue: #38bdf8;
+            --accent-green: #4ade80;
+            --accent-purple: #c084fc;
+            --accent-red: #f87171;
+            --text-main: #f8fafc;
+            --text-sub: #94a3b8;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Comic Sans MS', 'Chalkboard SE', 'Segoe UI', system-ui, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        .slide-container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+        }
+
+        .slide {
+            display: none;
+            width: 100%;
+            max-width: 950px;
+            background: var(--card-bg);
+            border-radius: 28px;
+            padding: 2.2rem;
+            box-shadow: 0 20px 30px rgba(0, 0, 0, 0.6);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            animation: popIn 0.3s ease-out;
+        }
+
+        .slide.active { display: block; }
+
+        @keyframes popIn {
+            from { opacity: 0; transform: scale(0.96); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .badge-time {
+            display: inline-block;
+            background: rgba(56, 189, 248, 0.2);
+            color: var(--accent-blue);
+            padding: 0.4rem 1.2rem;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1rem;
+            margin-bottom: 0.8rem;
+        }
+
+        h1 { font-size: 2.5rem; color: var(--accent-yellow); text-align: center; margin-bottom: 0.8rem; }
+        h2 { font-size: 2rem; color: var(--accent-yellow); margin-bottom: 0.8rem; }
+        h3 { font-size: 1.2rem; color: var(--accent-blue); margin-bottom: 0.4rem; }
+
+        p, li { font-size: 1.15rem; line-height: 1.5; color: #e2e8f0; margin-bottom: 0.6rem; }
+        ul, ol { margin-left: 1.2rem; }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 1rem;
+            margin-top: 0.8rem;
+        }
+
+        .card-box {
+            background: rgba(255, 255, 255, 0.04);
+            border-radius: 18px;
+            padding: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .card-box.g1 { border-top: 5px solid var(--accent-yellow); }
+        .card-box.g2 { border-top: 5px solid var(--accent-green); }
+        .card-box.g3 { border-top: 5px solid var(--accent-purple); }
+
+        .big-icon { font-size: 3.5rem; text-align: center; margin: 0.3rem 0; }
+
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 3rem;
+            background: rgba(15, 23, 42, 0.9);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        button {
+            background: var(--accent-yellow);
+            color: #0f172a;
+            border: none;
+            padding: 0.8rem 1.8rem;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 16px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        button:hover { transform: scale(1.05); }
+        button:disabled { background: #475569; color: #94a3b8; cursor: not-allowed; }
+        .progress { font-size: 1.2rem; font-weight: bold; color: var(--text-sub); }
+    </style>
+</head>
+<body>
+
+    <div class="slide-container">
+
+        <!-- Slide 1: Portada -->
+        <div class="slide active">
+            <span class="badge badge-time">Sesión 3 • Control del Circuito (1h 40min)</span>
+            <div class="big-icon">🔘🔴⚡</div>
+            <h1>¡Tomando el Control: Interruptores y Pulsadores!</h1>
+            <p style="text-align: center; font-size: 1.3rem; color: var(--accent-blue);">
+                Hoy aprenderemos a encender y apagar nuestros circuitos cuando nosotros queramos.
+            </p>
+            <div class="grid-3">
+                <div class="card-box g1">
+                    <h3>👦 Grupo 6-7 años</h3>
+                    <p>El Puente Levadizo y el Timbre de la Casa.</p>
+                </div>
+                <div class="card-box g2">
+                    <h3>👦 Grupo 8-9 años</h3>
+                    <p>El Telégrafo de Clave Morse con Luz.</p>
+                </div>
+                <div class="card-box g3">
+                    <h3>🧑 Grupo 10-11 años</h3>
+                    <p>Lógica de Botones: Configuración Serie (AND) y Paralelo (OR).</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 2: Explicación Visual -->
+        <div class="slide">
+            <span class="badge badge-time">¿Cómo Funciona un Botón?</span>
+            <h2>🌉 El Puente Abierto y Cerrado</h2>
+            <div class="grid-3">
+                <div class="card-box g1">
+                    <h3>6 y 7 años</h3>
+                    <p><strong>Sin presionar:</strong> El puente está arriba. La energía no puede cruzar y el LED duerme.</p>
+                    <p><strong>Al presionar:</strong> El puente baja. La energía cruza y el LED despierta.</p>
+                </div>
+                <div class="card-box g2">
+                    <h3>8 y 9 años</h3>
+                    <p><strong>Pulsador (Push-button):</strong> Solo hace contacto mientras mantengas el dedo encima.</p>
+                    <p><strong>Interruptor (Switch):</strong> Se queda trabado en su posición (encendido o apagado) como el foco de tu cuarto.</p>
+                </div>
+                <div class="card-box g3">
+                    <h3>10 y 11 años</h3>
+                    <p><strong>Nodos del Push-button:</strong> Tiene 4 patitas conectadas de 2 en 2 internamente. Hay que colocarlo cruzando la zanja central del protoboard.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: Retos Prácticos -->
+        <div class="slide">
+            <span class="badge badge-time">Manos a la Obra</span>
+            <h2>🛠️ ¡Los Retos de Hoy!</h2>
+            <div class="grid-3">
+                <div class="card-box g1">
+                    <h3>🚨 Reto 6-7 años</h3>
+                    <p>Conecta un pulsador en la línea de la batería para hacer un <strong>Timbre de Luz</strong> que solo prende al aplanar con tu dedo.</p>
+                </div>
+                <div class="card-box g2">
+                    <h3>📡 Reto 8-9 años</h3>
+                    <p>Fabrica tu <strong>Telégrafo Emisor</strong> y envía un código secreto (3 destellos cortos = SOS) a tu compañero.</p>
+                </div>
+                <div class="card-box g3">
+                    <h3>🧩 Reto 10-11 años</h3>
+                    <p><strong>Prueba de Lógica:</strong> Armar 2 botones en Serie (necesitas 2 manos) y luego cambiarlos a Paralelo (con 1 botón basta).</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: Cierre -->
+        <div class="slide">
+            <span class="badge badge-time">Repaso y Limpieza</span>
+            <h2>👏 ¡Misión Cumplida!</h2>
+            <p style="text-align: center; font-size: 1.3rem;">Hoy dominamos la forma de abrir y cerrar circuitos a voluntad.</p>
+            <div class="card-box" style="margin-top: 1rem; border-left: 6px solid var(--accent-yellow);">
+                <h3>🧹 Rutina de Orden:</h3>
+                <ul>
+                    <li>Revisa que los botones pequeños no se queden atorados en el protoboard.</li>
+                    <li>Guarda los pulsadores de 4 patas en su compartimento de plástico.</li>
+                    <li>Deja tu mesa limpia para la siguiente sesión.</li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Navegación -->
+    <div class="controls">
+        <button id="prevBtn" onclick="changeSlide(-1)">◀ Anterior</button>
+        <span class="progress" id="progress">1 / 4</span>
+        <button id="nextBtn" onclick="changeSlide(1)">Siguiente ▶</button>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const progress = document.getElementById('progress');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+
+        function showSlide(index) {
+            slides.forEach((slide, i) => slide.classList.toggle('active', i === index));
+            progress.textContent = `${index + 1} / ${slides.length}`;
+            prevBtn.disabled = index === 0;
+            nextBtn.disabled = index === slides.length - 1;
+        }
+
+        function changeSlide(direction) {
+            currentSlide += direction;
+            if (currentSlide < 0) currentSlide = 0;
+            if (currentSlide >= slides.length) currentSlide = slides.length - 1;
+            showSlide(currentSlide);
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') changeSlide(1);
+            else if (e.key === 'ArrowLeft') changeSlide(-1);
+        });
+
+        showSlide(currentSlide);
+    </script>
+</body>
+</html>

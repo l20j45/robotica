@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sesión 2: Mi Primer Circuito de Luz</title>
+    <style>
+        :root {
+            --bg-dark: #0f172a;
+            --card-bg: #1e293b;
+            --accent-yellow: #fbbf24;
+            --accent-blue: #38bdf8;
+            --accent-green: #4ade80;
+            --accent-red: #f87171;
+            --accent-purple: #c084fc;
+            --text-main: #f8fafc;
+            --text-sub: #94a3b8;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Comic Sans MS', 'Chalkboard SE', 'Segoe UI', system-ui, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        .slide-container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+        }
+
+        .slide {
+            display: none;
+            width: 100%;
+            max-width: 950px;
+            background: var(--card-bg);
+            border-radius: 28px;
+            padding: 2.2rem;
+            box-shadow: 0 20px 30px rgba(0, 0, 0, 0.6);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            animation: popIn 0.3s ease-out;
+        }
+
+        .slide.active { display: block; }
+
+        @keyframes popIn {
+            from { opacity: 0; transform: scale(0.96); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .badge-time {
+            display: inline-block;
+            background: rgba(56, 189, 248, 0.2);
+            color: var(--accent-blue);
+            padding: 0.4rem 1.2rem;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1rem;
+            margin-bottom: 0.8rem;
+        }
+
+        h1 { font-size: 2.6rem; color: var(--accent-yellow); text-align: center; margin-bottom: 0.8rem; }
+        h2 { font-size: 2rem; color: var(--accent-yellow); margin-bottom: 0.8rem; }
+        h3 { font-size: 1.3rem; color: var(--accent-blue); margin-bottom: 0.4rem; }
+
+        p, li { font-size: 1.2rem; line-height: 1.5; color: #e2e8f0; margin-bottom: 0.6rem; }
+        ul, ol { margin-left: 1.5rem; }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.2rem;
+            margin-top: 0.8rem;
+        }
+
+        .card-box {
+            background: rgba(255, 255, 255, 0.04);
+            border-radius: 20px;
+            padding: 1.2rem;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .card-box.kid { border-left: 6px solid var(--accent-yellow); }
+        .card-box.older { border-left: 6px solid var(--accent-blue); }
+        .card-box.special { border-left: 6px solid var(--accent-purple); background: rgba(192, 132, 252, 0.08); }
+
+        .big-icon {
+            font-size: 4rem;
+            text-align: center;
+            margin: 0.3rem 0;
+        }
+
+        .svg-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0.8rem 0;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 3rem;
+            background: rgba(15, 23, 42, 0.9);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        button {
+            background: var(--accent-yellow);
+            color: #0f172a;
+            border: none;
+            padding: 0.8rem 1.8rem;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 16px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(251, 191, 36, 0.4);
+        }
+
+        button:disabled {
+            background: #475569;
+            color: #94a3b8;
+            transform: none;
+            box-shadow: none;
+            cursor: not-allowed;
+        }
+
+        .progress { font-size: 1.2rem; font-weight: bold; color: var(--text-sub); }
+    </style>
+</head>
+<body>
+
+    <div class="slide-container">
+
+        <!-- Slide 1: Portada -->
+        <div class="slide active">
+            <span class="badge badge-time">Sesión 2 • Práctica Real (1h 40min)</span>
+            <div class="big-icon">💡🔋🛠️</div>
+            <h1>¡Encendiendo Mi Primer LED!</h1>
+            <p style="text-align: center; font-size: 1.4rem; color: var(--accent-blue);">
+                Construyendo nuestro primer circuito físico y trabajando en nuestra libreta.
+            </p>
+            <div class="grid-2" style="margin-top: 1.2rem;">
+                <div class="card-box kid">
+                    <h3>👦 Pequeños (6-9 años)</h3>
+                    <p>Armaremos el circuito y colorearemos la hoja de nuestro amigo el LED.</p>
+                </div>
+                <div class="card-box older">
+                    <h3>🧑 Mayores (9-13 años)</h3>
+                    <p>Haremos la práctica en protoboard y copiaremos el dictado técnico con diagramas.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 2: Armado Paso a Paso -->
+        <div class="slide">
+            <span class="badge badge-time">Minuto 00:15 - 00:45</span>
+            <h2>🛠️ Paso a Paso del Circuito</h2>
+            <ol style="font-size: 1.2rem; line-height: 1.7;">
+                <li>Inserta el <strong>LED</strong> en el protoboard (recuerda cuál es la pata larga +).</li>
+                <li>Conecta la <strong>Resistencia</strong> en la misma línea de la pata larga (+).</li>
+                <li>Conecta el cable <strong>ROJO (+)</strong> del portabaterías al otro lado de la resistencia.</li>
+                <li>Conecta el cable <strong>NEGRO (-)</strong> directo a la pata corta del LED.</li>
+                <li style="color: var(--accent-green); font-weight: bold;">✨ ¡Tu circuito está cerrado y encendido!</li>
+            </ol>
+        </div>
+
+        <!-- Slide 3: Actividades de Papel -->
+        <div class="slide">
+            <span class="badge badge-time">Minuto 00:45 - 01:15</span>
+            <h2>✏️ Tiempo de Libreta y Dibujo</h2>
+            <div class="grid-2">
+                <div class="card-box kid">
+                    <h3>🎨 Pequeños: "Pinta y Conecta"</h3>
+                    <p>1. Colorea la batería, el LED y la resistencia en tu hoja impresa.</p>
+                    <p>2. Traza con crayola roja el camino del polo positivo.</p>
+                    <p>3. Dibuja una cara feliz encendida en tu LED.</p>
+                </div>
+                <div class="card-box older">
+                    <h3>📝 Mayores: "Dictado Técnico"</h3>
+                    <p>Abre tu libreta para copiar las 3 reglas del circuito y dibujar el <strong>diagrama esquemático</strong> con la simbología de electrónica.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: Detective de Fallas -->
+        <div class="slide">
+            <span class="badge badge-time">Minuto 01:15 - 01:30</span>
+            <h2>🔍 Experimento: ¿Qué pasa si...?</h2>
+            <div class="card-box special">
+                <h3 style="text-align: center; color: var(--accent-purple);">Probemos girar el LED al revés:</h3>
+                <ul>
+                    <li>Desconecta el LED y pon la pata corta en el positivo y la larga en el negativo.</li>
+                    <li>¿Encendió la luz? <strong>¡No!</strong></li>
+                    <li><strong>Explicación:</strong> El LED es un "semáforo de un solo sentido". Si los electrones vienen al revés, no los deja pasar.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 5: Cierre -->
+        <div class="slide">
+            <span class="badge badge-time">Minuto 01:30 - 01:40</span>
+            <h2>👏 ¡Misión Cumplida!</h2>
+            <div class="grid-2">
+                <div class="card-box">
+                    <h3>Lo que logramos hoy:</h3>
+                    <p>✅ Armamos un circuito real.</p>
+                    <p>✅ Entendimos la pata larga (+).</p>
+                    <p>✅ Completamos nuestra hoja de trabajo.</p>
+                </div>
+                <div class="card-box alert" style="border-left: 6px solid var(--accent-red);">
+                    <h3>🧹 Limpieza:</h3>
+                    <p>Separa los componentes con cuidado y mételos en su cajita correspondientes.</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Navegación -->
+    <div class="controls">
+        <button id="prevBtn" onclick="changeSlide(-1)">◀ Anterior</button>
+        <span class="progress" id="progress">1 / 5</span>
+        <button id="nextBtn" onclick="changeSlide(1)">Siguiente ▶</button>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const progress = document.getElementById('progress');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.classList.toggle('active', i === index);
+            });
+            progress.textContent = `${index + 1} / ${slides.length}`;
+            prevBtn.disabled = index === 0;
+            nextBtn.disabled = index === slides.length - 1;
+        }
+
+        function changeSlide(direction) {
+            currentSlide += direction;
+            if (currentSlide < 0) currentSlide = 0;
+            if (currentSlide >= slides.length) currentSlide = slides.length - 1;
+            showSlide(currentSlide);
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                changeSlide(1);
+            } else if (e.key === 'ArrowLeft') {
+                changeSlide(-1);
+            }
+        });
+
+        showSlide(currentSlide);
+    </script>
+</body>
+</html>
