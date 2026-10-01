@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Programa completo del curso de robótica: 34 sesiones, proyectos y materiales necesarios.">
+	<title>Programa del Curso | Robótica y Electrónica</title>
+	<style>
+		:root {
+			color-scheme: dark;
+			--bg: #0f172a;
+			--surface: #1e293b;
+			--line: rgba(226, 232, 240, 0.12);
+			--yellow: #fbbf24;
+			--blue: #38bdf8;
+			--green: #4ade80;
+			--purple: #c084fc;
+			--red: #f87171;
+			--text: #f8fafc;
+			--muted: #a5b4c7;
+		}
+
+		* { box-sizing: border-box; }
+		html { scroll-behavior: smooth; }
+
+		body {
+			min-width: 320px;
+			margin: 0;
+			background-color: var(--bg);
+			background-image: radial-gradient(rgba(148, 163, 184, 0.13) 0.7px, transparent 0.7px);
+			background-size: 22px 22px;
+			color: var(--text);
+			font-family: 'Chalkboard SE', 'Segoe UI', system-ui, sans-serif;
+			line-height: 1.55;
+		}
+
+		a { color: inherit; }
+		.container { width: min(1120px, calc(100% - 40px)); margin: 0 auto; }
+
+		.hero {
+			position: relative;
+			isolation: isolate;
+			overflow: hidden;
+			padding: 56px 0 38px;
+			border-bottom: 1px solid var(--line);
+			background: linear-gradient(135deg, rgba(30, 41, 59, 0.98), rgba(15, 23, 42, 0.94));
+		}
+
+		.hero::after {
+			position: absolute;
+			z-index: -1;
+			top: -120px;
+			right: -80px;
+			width: 420px;
+			height: 420px;
+			border: 1px solid rgba(56, 189, 248, 0.18);
+			border-radius: 50%;
+			box-shadow: 0 0 0 34px rgba(56, 189, 248, 0.035), 0 0 0 68px rgba(251, 191, 36, 0.025);
+			content: '';
+		}
+
+		.eyebrow { margin: 0 0 12px; color: var(--blue); font-size: 0.8rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; }
+		h1, h2, h3, p { margin-top: 0; }
+		h1 { max-width: 760px; margin-bottom: 12px; color: var(--yellow); font-size: clamp(2.25rem, 5vw, 3.5rem); line-height: 1.08; }
+		.hero-copy { max-width: 680px; margin-bottom: 24px; color: #dbe5f0; font-size: 1.1rem; }
+		.stats { display: flex; flex-wrap: wrap; gap: 10px; }
+		.stat { display: inline-flex; align-items: center; gap: 8px; min-height: 40px; padding: 7px 13px; border: 1px solid var(--line); border-radius: 8px; background: rgba(15, 23, 42, 0.7); color: #dbe5f0; font-size: 0.9rem; }
+		.stat strong { color: var(--yellow); }
+
+		.page-nav { position: sticky; z-index: 5; top: 0; border-bottom: 1px solid var(--line); background: rgba(15, 23, 42, 0.96); backdrop-filter: blur(12px); }
+		.nav-inner { display: flex; align-items: center; gap: 8px; min-height: 58px; overflow-x: auto; scrollbar-width: thin; }
+		.page-nav a { flex: 0 0 auto; padding: 8px 11px; border-radius: 6px; color: var(--muted); font-size: 0.88rem; font-weight: 700; text-decoration: none; transition: color 160ms ease, background 160ms ease; }
+		.page-nav a:hover, .page-nav a:focus-visible { background: rgba(56, 189, 248, 0.12); color: var(--blue); outline: none; }
+
+		main { padding: 36px 0 64px; }
+		.section { margin-bottom: 54px; scroll-margin-top: 82px; }
+		.section-heading { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 14px; margin-bottom: 18px; }
+		.section-heading h2 { margin: 0; color: var(--yellow); font-size: clamp(1.5rem, 3vw, 2rem); line-height: 1.2; }
+		.section-heading p { max-width: 600px; margin: 6px 0 0; color: var(--muted); }
+
+		.schedule { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; }
+		.schedule-item { min-height: 148px; padding: 16px; border: 1px solid var(--line); border-top: 3px solid var(--step-color, var(--blue)); border-radius: 8px; background: var(--surface); }
+		.schedule-item time { display: block; margin-bottom: 12px; color: var(--step-color, var(--blue)); font-size: 1.3rem; font-weight: 900; }
+		.schedule-item h3 { margin-bottom: 6px; font-size: 0.98rem; }
+		.schedule-item p { margin: 0; color: var(--muted); font-size: 0.86rem; }
+
+		.course-tools { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin: 24px 0 16px; }
+		.course-tools p { margin: 0; color: var(--muted); font-size: 0.92rem; }
+		.search-wrap { position: relative; width: min(340px, 100%); }
+		.search-wrap label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0); }
+		.search-wrap input { width: 100%; min-height: 44px; padding: 10px 14px 10px 40px; border: 1px solid rgba(56, 189, 248, 0.38); border-radius: 8px; background: var(--surface); color: var(--text); font: inherit; }
+		.search-wrap input::placeholder { color: #91a2b7; }
+		.search-wrap input:focus { border-color: var(--blue); outline: 2px solid rgba(56, 189, 248, 0.2); }
+		.search-icon { position: absolute; top: 11px; left: 13px; color: var(--blue); pointer-events: none; }
+
+		.block { --block-color: var(--blue); margin-bottom: 18px; overflow: hidden; border: 1px solid var(--line); border-left: 4px solid var(--block-color); border-radius: 8px; background: rgba(30, 41, 59, 0.94); animation: rise-in 420ms ease both; }
+		.block:nth-of-type(2) { animation-delay: 50ms; }
+		.block:nth-of-type(3) { animation-delay: 100ms; }
+		.block:nth-of-type(4) { animation-delay: 150ms; }
+
+		@keyframes rise-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+		.block-header { display: grid; grid-template-columns: 54px 1fr auto; align-items: center; gap: 16px; padding: 20px; border-bottom: 1px solid var(--line); }
+		.block-number { display: grid; width: 48px; aspect-ratio: 1; place-items: center; border: 1px solid color-mix(in srgb, var(--block-color), transparent 45%); border-radius: 8px; color: var(--block-color); font-size: 1.35rem; font-weight: 900; }
+		.block-header h3 { margin: 0 0 4px; font-size: 1.2rem; }
+		.block-header p { margin: 0; color: var(--muted); font-size: 0.92rem; }
+		.session-count { padding: 6px 10px; border-radius: 6px; background: rgba(15, 23, 42, 0.72); color: var(--block-color); font-size: 0.82rem; font-weight: 800; white-space: nowrap; }
+		.session-list { padding: 0 20px; }
+		.session-row { display: grid; grid-template-columns: 48px minmax(180px, 0.85fr) minmax(0, 1.5fr); gap: 14px; padding: 16px 0; border-bottom: 1px solid rgba(226, 232, 240, 0.08); }
+		.session-row:last-child { border-bottom: 0; }
+		.session-number { align-self: start; padding-top: 2px; color: var(--block-color); font-size: 0.95rem; font-weight: 900; font-variant-numeric: tabular-nums; }
+		.session-row h4 { margin: 0; font-size: 0.97rem; line-height: 1.4; }
+		.session-project { margin: 0; color: #c3cfdd; font-size: 0.91rem; }
+		.session-project strong { color: var(--text); }
+		.empty-state { display: none; padding: 24px; border: 1px dashed var(--line); border-radius: 8px; color: var(--muted); text-align: center; }
+
+		.materials-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+		.material-group { padding: 20px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); }
+		.material-group h3 { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; color: var(--blue); font-size: 1.06rem; }
+		.material-group ul { display: grid; gap: 8px; margin: 0; padding-left: 20px; color: #d6e0ec; }
+		.material-group li { padding-left: 2px; }
+		.material-group li::marker { color: var(--yellow); }
+		.footer { padding: 20px 0 30px; border-top: 1px solid var(--line); color: var(--muted); font-size: 0.88rem; text-align: center; }
+
+		@media (max-width: 850px) {
+			.schedule { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+			.schedule-item { min-height: 130px; }
+		}
+
+		@media (max-width: 620px) {
+			.container { width: min(100% - 28px, 1120px); }
+			.hero { padding: 38px 0 30px; }
+			.hero::after { right: -250px; opacity: 0.6; }
+			.hero-copy { font-size: 1rem; }
+			main { padding-top: 28px; }
+			.schedule { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+			.schedule-item { min-height: 126px; padding: 13px; }
+			.schedule-item:last-child { grid-column: 1 / -1; min-height: auto; }
+			.course-tools { align-items: stretch; flex-direction: column; }
+			.search-wrap { width: 100%; }
+			.block-header { grid-template-columns: 42px 1fr; gap: 12px; padding: 16px; }
+			.block-number { width: 40px; font-size: 1.1rem; }
+			.session-count { grid-column: 2; justify-self: start; }
+			.session-list { padding: 0 16px; }
+			.session-row { grid-template-columns: 38px 1fr; gap: 5px 10px; }
+			.session-project { grid-column: 2; }
+			.materials-grid { grid-template-columns: 1fr; }
+		}
+
+		@media (prefers-reduced-motion: reduce) {
+			*, *::before, *::after { scroll-behavior: auto !important; animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+		}
+	</style>
+</head>
+<body>
+	<header class="hero">
+		<div class="container">
+			<p class="eyebrow">Taller de robótica escolar</p>
+			<h1>Programa del curso</h1>
+			<p class="hero-copy">De los primeros circuitos en protoboard a la construcción de robots mecánicos. Un recorrido práctico para aprender haciendo.</p>
+			<div class="stats" aria-label="Resumen del curso">
+				<span class="stat"><strong>34</strong> sesiones</span>
+				<span class="stat"><strong>4</strong> bloques</span>
+				<span class="stat"><strong>3 h</strong> por sesión</span>
+			</div>
+		</div>
+	</header>
+
+	<nav class="page-nav" aria-label="Navegación del programa">
+		<div class="container nav-inner">
+			<a href="#estructura">Estructura de sesión</a>
+			<a href="#bloque-1">Bloque 1</a>
+			<a href="#bloque-2">Bloque 2</a>
+			<a href="#bloque-3">Bloque 3</a>
+			<a href="#bloque-4">Bloque 4</a>
+			<a href="#materiales">Materiales</a>
+		</div>
+	</nav>
+
+	<main class="container">
+		<section class="section" id="estructura" aria-labelledby="estructura-title">
+			<div class="section-heading">
+				<div>
+					<h2 id="estructura-title">Así se vive cada sesión</h2>
+					<p>Una rutina de 180 minutos que combina explicación, construcción, experimentación y orden.</p>
+				</div>
+			</div>
+			<div class="schedule">
+				<article class="schedule-item" style="--step-color: var(--blue)"><time>25 min</time><h3>Explicación visual</h3><p>Concepto clave, ejemplos físicos y analogías sencillas.</p></article>
+				<article class="schedule-item" style="--step-color: var(--green)"><time>60 min</time><h3>Práctica guiada</h3><p>Armado paso a paso en protoboard o chasis.</p></article>
+				<article class="schedule-item" style="--step-color: var(--purple)"><time>15 min</time><h3>Receso</h3><p>Pausa para estirar las piernas y despejar la mente.</p></article>
+				<article class="schedule-item" style="--step-color: var(--red)"><time>65 min</time><h3>Reto creativo</h3><p>Modificación del circuito o desafío práctico.</p></article>
+				<article class="schedule-item" style="--step-color: var(--yellow)"><time>15 min</time><h3>Cierre y orden</h3><p>Clasificación de componentes y limpieza del área.</p></article>
+			</div>
+		</section>
+
+		<section class="section" id="programa" aria-labelledby="programa-title">
+			<div class="section-heading">
+				<div>
+					<h2 id="programa-title">Recorrido de aprendizaje</h2>
+					<p>Explora los temas y proyectos de cada sesión, o busca por concepto, componente o práctica.</p>
+				</div>
+			</div>
+			<div class="course-tools">
+				<p id="result-count" aria-live="polite">34 sesiones en el programa</p>
+				<div class="search-wrap"><span class="search-icon" aria-hidden="true">⌕</span><label for="session-search">Buscar sesiones</label><input id="session-search" type="search" placeholder="Buscar tema, sensor o proyecto..." autocomplete="off"></div>
+			</div>
+			<p class="empty-state" id="empty-state">No hay sesiones que coincidan con la búsqueda.</p>
+
+			<article class="block" id="bloque-1" style="--block-color: var(--yellow)">
+				<header class="block-header"><span class="block-number" aria-hidden="true">01</span><div><h3>Electrónica básica en protoboard</h3><p>Comprender la corriente, el protoboard y los componentes pasivos básicos.</p></div><span class="session-count">Sesiones 01–10</span></header>
+				<div class="session-list">
+					<article class="session-row" data-search="01 electricidad circuito cerrado portabateria aa resistencia led corriente"><span class="session-number">01</span><h4>¿Qué es la electricidad?</h4><p class="session-project"><strong>Práctica:</strong> Circuito cerrado básico con portabatería AA, resistencia y LED.</p></article>
+					<article class="session-row" data-search="02 protoboard conexiones internas lineas alimentacion puenteado pistas"><span class="session-number">02</span><h4>El protoboard a fondo</h4><p class="session-project"><strong>Práctica:</strong> Conexiones internas, líneas de alimentación y puenteado de pistas.</p></article>
+					<article class="session-row" data-search="03 interruptores pulsadores push buttons serie paralelo"><span class="session-number">03</span><h4>Interruptores y pulsadores</h4><p class="session-project"><strong>Práctica:</strong> Circuitos con pulsadores conectados en serie y en paralelo.</p></article>
+					<article class="session-row" data-search="04 control luz sonido brillo led tono buzzer potenciometro"><span class="session-number">04</span><h4>Control de luz y sonido</h4><p class="session-project"><strong>Práctica:</strong> Variar el brillo de un LED y el tono de un buzzer con potenciómetro.</p></article>
+					<article class="session-row" data-search="05 serie paralelo red iluminacion brillo corriente"><span class="session-number">05</span><h4>Serie vs. paralelo</h4><p class="session-project"><strong>Práctica:</strong> Red de iluminación para comparar brillo y corriente.</p></article>
+					<article class="session-row" data-search="06 motores dc motor micro velocidad 3v 6v"><span class="session-number">06</span><h4>Introducción a motores DC</h4><p class="session-project"><strong>Práctica:</strong> Encender y controlar la velocidad de un micromotor DC de 3–6 V.</p></article>
+					<article class="session-row" data-search="07 teclado analogico piano tonos pulsadores resistencias"><span class="session-number">07</span><h4>Teclado analógico simple</h4><p class="session-project"><strong>Práctica:</strong> Piano de tonos básicos usando pulsadores y una red de resistencias.</p></article>
+					<article class="session-row" data-search="08 energia condensador temporizador apagado progresivo led"><span class="session-number">08</span><h4>Almacenando energía</h4><p class="session-project"><strong>Práctica:</strong> Temporizador de apagado progresivo para un LED con condensador.</p></article>
+					<article class="session-row" data-search="09 juego pulso firme habilidad circuito cerrado led buzzer"><span class="session-number">09</span><h4>Juego del pulso firme</h4><p class="session-project"><strong>Práctica:</strong> Circuito de habilidad con circuito cerrado, LED y buzzer.</p></article>
+					<article class="session-row" data-search="10 reto integrador proyecto libre motores luces sonido protoboard"><span class="session-number">10</span><h4>Reto integrador</h4><p class="session-project"><strong>Práctica:</strong> Proyecto libre que combine control de motores, luces y sonido en protoboard.</p></article>
+				</div>
+			</article>
+
+			<article class="block" id="bloque-2" style="--block-color: var(--green)">
+				<header class="block-header"><span class="block-number" aria-hidden="true">02</span><div><h3>Sensores analógicos y módulos económicos</h3><p>Crear sistemas automáticos que reaccionen al entorno usando sensores y transistores.</p></div><span class="session-count">Sesiones 11–20</span></header>
+				<div class="session-list">
+					<article class="session-row" data-search="11 sensor luz ldr lampara nocturna oscuridad transistor bc547"><span class="session-number">11</span><h4>Sensor de luz (LDR)</h4><p class="session-project"><strong>Práctica:</strong> Lámpara nocturna automática con LDR y transistor BC547.</p></article>
+					<article class="session-row" data-search="12 sensor lluvia humedad gotas agua aviso acustico luminoso"><span class="session-number">12</span><h4>Sensor de lluvia y humedad</h4><p class="session-project"><strong>Práctica:</strong> Activar un aviso acústico o luminoso con un sensor de gotas de agua.</p></article>
+					<article class="session-row" data-search="13 modulo sonido microfono aplausos led motor"><span class="session-number">13</span><h4>Módulo de sonido y micrófono</h4><p class="session-project"><strong>Práctica:</strong> Activar un LED o motor mediante aplausos.</p></article>
+					<article class="session-row" data-search="14 sensor magnetico reed switch alarma puerta iman"><span class="session-number">14</span><h4>Sensor magnético (Reed Switch)</h4><p class="session-project"><strong>Práctica:</strong> Alarma para puertas que detecta cuándo se aleja un imán.</p></article>
+					<article class="session-row" data-search="15 sensor inclinacion tilt switch movimiento caida canica bola"><span class="session-number">15</span><h4>Sensor de inclinación (Tilt Switch)</h4><p class="session-project"><strong>Práctica:</strong> Indicador de movimiento o caída mediante un interruptor de bola.</p></article>
+					<article class="session-row" data-search="16 modulo infrarrojo presencia tcrt5000 sensor"><span class="session-number">16</span><h4>Módulo infrarrojo</h4><p class="session-project"><strong>Práctica:</strong> Detección de presencia a corta distancia con sensor TCRT5000.</p></article>
+					<article class="session-row" data-search="17 modulo relevador relay motor señal sensor control"><span class="session-number">17</span><h4>Módulo relevador (Relay)</h4><p class="session-project"><strong>Práctica:</strong> Controlar un motor usando la señal pequeña de un sensor.</p></article>
+					<article class="session-row" data-search="18 alarma paso integrada infrarrojo relevador buzzer seguridad"><span class="session-number">18</span><h4>Alarma de paso integrada</h4><p class="session-project"><strong>Práctica:</strong> Sistema de seguridad combinando sensor infrarrojo, relevador y buzzer.</p></article>
+					<article class="session-row" data-search="19 estacion domotica automatizacion ventilador luz entorno"><span class="session-number">19</span><h4>Estación domótica simple</h4><p class="session-project"><strong>Práctica:</strong> Automatización que activa un ventilador o una luz según el entorno.</p></article>
+					<article class="session-row" data-search="20 cierre automatismos exposicion prueba sistemas automaticos alumnos"><span class="session-number">20</span><h4>Cierre de automatismos</h4><p class="session-project"><strong>Práctica:</strong> Exposición y prueba de los sistemas automáticos construidos.</p></article>
+				</div>
+			</article>
+
+			<article class="block" id="bloque-3" style="--block-color: var(--blue)">
+				<header class="block-header"><span class="block-number" aria-hidden="true">03</span><div><h3>Motores, ruedas y vehículos simples</h3><p>Explorar la conversión de energía eléctrica en movimiento y el control de dirección.</p></div><span class="session-count">Sesiones 21–28</span></header>
+				<div class="session-list">
+					<article class="session-row" data-search="21 motores transmisiones reductores amarillos tt helices poleas velocidad fuerza"><span class="session-number">21</span><h4>Motores y transmisiones</h4><p class="session-project"><strong>Práctica:</strong> Probar velocidad y fuerza con motores TT, hélices y poleas.</p></article>
+					<article class="session-row" data-search="22 inversion giro direccion motor polaridad"><span class="session-number">22</span><h4>Inversión de giro</h4><p class="session-project"><strong>Práctica:</strong> Cambiar la dirección del motor invirtiendo la polaridad.</p></article>
+					<article class="session-row" data-search="23 control interruptor dpdt adelante parar atras palanca deslizante"><span class="session-number">23</span><h4>Control por interruptor DPDT</h4><p class="session-project"><strong>Práctica:</strong> Conectar un interruptor para seleccionar adelante, parar y atrás.</p></article>
+					<article class="session-row" data-search="24 ensamblado chasis motores reductores ruedas goma rueda loca"><span class="session-number">24</span><h4>Ensamblado de chasis</h4><p class="session-project"><strong>Práctica:</strong> Montar dos motores reductores, ruedas de goma y rueda loca en una base.</p></article>
+					<article class="session-row" data-search="25 control remoto cable mando cableado interruptores ruedas"><span class="session-number">25</span><h4>Control remoto por cable</h4><p class="session-project"><strong>Práctica:</strong> Fabricar un mando cableado con dos interruptores para controlar dos ruedas.</p></article>
+					<article class="session-row" data-search="26 maniobras conduccion giros eje pista conos calibracion"><span class="session-number">26</span><h4>Maniobras de conducción</h4><p class="session-project"><strong>Práctica:</strong> Calibrar y practicar giros sobre el eje en una pista de conos.</p></article>
+					<article class="session-row" data-search="27 luces indicadores faros led delanteros traseros avanzar"><span class="session-number">27</span><h4>Luces e indicadores</h4><p class="session-project"><strong>Práctica:</strong> Instalar faros LED delanteros y traseros que se encienden al avanzar.</p></article>
+					<article class="session-row" data-search="28 carrera precision alineacion balance peso carreras velocidad recta"><span class="session-number">28</span><h4>Carrera de precisión</h4><p class="session-project"><strong>Práctica:</strong> Probar alineación, balance de peso y velocidad en línea recta.</p></article>
+				</div>
+			</article>
+
+			<article class="block" id="bloque-4" style="--block-color: var(--red)">
+				<header class="block-header"><span class="block-number" aria-hidden="true">04</span><div><h3>Robots mecánicos e insectos inteligentes</h3><p>Construir mecanismos que tomen decisiones físicas sencillas con interruptores mecánicos.</p></div><span class="session-count">Sesiones 29–34</span></header>
+				<div class="session-list">
+					<article class="session-row" data-search="29 robot insecto hexapodo patas alambre plastico motor reductor caminar"><span class="session-number">29</span><h4>Robot insecto o hexápodo</h4><p class="session-project"><strong>Práctica:</strong> Adaptar un mecanismo de patas a un motor reductor para caminar.</p></article>
+					<article class="session-row" data-search="30 robot cepillo limpiador motor vibrador cerdas desplazamiento aleatorio"><span class="session-number">30</span><h4>Robot cepillo y limpiador</h4><p class="session-project"><strong>Práctica:</strong> Crear un robot con motor vibrador sobre cerdas para desplazamiento aleatorio.</p></article>
+					<article class="session-row" data-search="31 carrito antichoque mecanico micro switch palanca invierte marcha pared"><span class="session-number">31</span><h4>Carrito antichoque mecánico</h4><p class="session-project"><strong>Práctica:</strong> Invertir la marcha al chocar con una pared usando un microswitch frontal.</p></article>
+					<article class="session-row" data-search="32 robot limpia mesas bordes micro switch abajo frena caer"><span class="session-number">32</span><h4>Robot limpia-mesas</h4><p class="session-project"><strong>Práctica:</strong> Detectar bordes con un microswitch orientado hacia abajo para evitar caídas.</p></article>
+					<article class="session-row" data-search="33 calibracion estetica conexiones cableado cinchos carcasa"><span class="session-number">33</span><h4>Calibración y estética</h4><p class="session-project"><strong>Práctica:</strong> Asegurar conexiones, ordenar el cableado y personalizar la carcasa.</p></article>
+					<article class="session-row" data-search="34 demostracion torneo exhibicion final robots mecanicos padres constancias"><span class="session-number">34</span><h4>Demostración y torneo</h4><p class="session-project"><strong>Práctica:</strong> Exhibición final de robots mecánicos y entrega de constancias.</p></article>
+				</div>
+			</article>
+		</section>
+
+		<section class="section" id="materiales" aria-labelledby="materiales-title">
+			<div class="section-heading">
+				<div><h2 id="materiales-title">Materiales del curso</h2><p>Lista consolidada de componentes reutilizables, módulos y elementos mecánicos por alumno o pareja.</p></div>
+			</div>
+			<div class="materials-grid">
+				<article class="material-group"><h3><span aria-hidden="true">▦</span> Electrónica reutilizable</h3><ul>
+					<li>Protoboard de 400 puntos (1 pieza).</li><li>Portabaterías de 2 o 4 pilas AA, con interruptor integrado.</li><li>Cables Dupont macho-macho y macho-hembra, más cables caimán.</li><li>LEDs de 5 mm rojos, verdes y amarillos.</li><li>Resistencias surtidas: 220 Ω, 330 Ω, 1 kΩ y 10 kΩ.</li>
+				</ul></article>
+				<article class="material-group"><h3><span aria-hidden="true">⌁</span> Entradas y controles</h3><ul>
+					<li>Pulsadores (push-buttons).</li><li>Potenciómetros de 10 kΩ.</li><li>Interruptores DPDT.</li><li>Microswitches de palanca.</li>
+				</ul></article>
+				<article class="material-group"><h3><span aria-hidden="true">◉</span> Sonido y sensores</h3><ul>
+					<li>Buzzers piezoeléctricos.</li><li>Fotoresistencias LDR.</li><li>Módulo sensor infrarrojo TCRT5000.</li><li>Módulo de sonido o micrófono.</li><li>Módulo relevador de un canal, 5 V.</li><li>Transistores NPN BC547 o 2N2222.</li>
+				</ul></article>
+				<article class="material-group"><h3><span aria-hidden="true">⚙</span> Actuadores y mecánica</h3><ul>
+					<li>Motores DC simples de 3–6 V.</li><li>Motores reductores amarillos TT (2 por alumno o equipo).</li><li>Ruedas de goma compatibles.</li><li>Chasis 2WD de acrílico o plástico.</li>
+				</ul></article>
+			</div>
+		</section>
+	</main>
+
+	<footer class="footer"><div class="container">Curso de Robótica y Electrónica · Aprende, construye y experimenta.</div></footer>
+
+	<script>
+		const searchInput = document.getElementById('session-search');
+		const sessionRows = [...document.querySelectorAll('.session-row')];
+		const blocks = [...document.querySelectorAll('.block')];
+		const resultCount = document.getElementById('result-count');
+		const emptyState = document.getElementById('empty-state');
+
+		searchInput.addEventListener('input', () => {
+			const query = searchInput.value.trim().toLocaleLowerCase('es');
+			let visibleCount = 0;
+
+			sessionRows.forEach((row) => {
+				const matches = row.dataset.search.includes(query) || row.textContent.toLocaleLowerCase('es').includes(query);
+				row.hidden = !matches;
+				if (matches) visibleCount += 1;
+			});
+
+			blocks.forEach((block) => {
+				block.hidden = !block.querySelector('.session-row:not([hidden])');
+			});
+
+			resultCount.textContent = query
+				? `${visibleCount} ${visibleCount === 1 ? 'sesión encontrada' : 'sesiones encontradas'}`
+				: '34 sesiones en el programa';
+			emptyState.style.display = visibleCount === 0 ? 'block' : 'none';
+		});
+	</script>
+</body>
+</html>

@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Imprimir - Fichas de Actividades Sesión 4B</title>
+  <style>
+    @page {
+      size: letter portrait;
+      margin: 1.2cm;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: "Segoe UI", Arial, sans-serif;
+    }
+    body {
+      background: #ffffff;
+      color: #0f172a;
+      line-height: 1.4;
+    }
+    .page {
+      width: 100%;
+      max-width: 800px;
+      margin: 0 auto 2rem auto;
+      padding: 1.5rem;
+      border: 2px dashed #cbd5e1;
+      border-radius: 12px;
+      page-break-after: always;
+    }
+    .no-print-bar {
+      background: #0284c7;
+      color: #ffffff;
+      padding: 1rem;
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+    .no-print-bar button {
+      font-size: 1rem;
+      font-weight: bold;
+      padding: 0.6rem 1.2rem;
+      background: #f59e0b;
+      border: none;
+      color: #ffffff;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    h1 {
+      font-size: 1.5rem;
+      color: #0284c7;
+      text-align: center;
+      text-transform: uppercase;
+      margin-bottom: 0.2rem;
+    }
+    .subtitle {
+      text-align: center;
+      font-weight: bold;
+      color: #475569;
+      margin-bottom: 1rem;
+    }
+    .info-box {
+      border: 1px solid #cbd5e1;
+      padding: 0.6rem 1rem;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+      display: flex;
+      justify-content: space-between;
+    }
+    .card {
+      border-radius: 12px;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      border: 2px solid #e2e8f0;
+    }
+    .c-a { border-color: #f59e0b; background: #fffbeb; }
+    .c-b { border-color: #16a34a; background: #f0fdf4; }
+    .c-c { border-color: #9333ea; background: #faf5ff; }
+    
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin: 0.5rem 0;
+    }
+    th, td {
+      border: 1px solid #64748b;
+      padding: 0.5rem;
+      text-align: center;
+    }
+    th {
+      background: #f1f5f9;
+    }
+    .line {
+      border-bottom: 1px solid #0f172a;
+      display: inline-block;
+      min-width: 180px;
+    }
+    
+    .pal {
+      display: flex;
+      gap: 0.4rem;
+      justify-content: center;
+      margin: 0.5rem 0;
+    }
+    .pal button {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      border: 2px solid #cbd5e1;
+      cursor: pointer;
+    }
+    svg.col {
+      width: 100%;
+      max-width: 500px;
+      display: block;
+      margin: 0 auto;
+      background: #ffffff;
+      border-radius: 10px;
+      border: 1px solid #cbd5e1;
+    }
+    svg.col .c {
+      fill: #ffffff;
+      stroke: #1e293b;
+      stroke-width: 2;
+      cursor: pointer;
+    }
+    
+    @media print {
+      .no-print-bar { display: none; }
+      .page {
+        border: none;
+        padding: 0;
+        margin: 0;
+        width: 100%;
+        max-width: 100%;
+        page-break-after: always;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="no-print-bar">
+    <span>Vista previa de impresión. Presiona el botón para generar las hojas: </span>
+    <button onclick="window.print()">🖨️ Imprimir Fichas</button>
+  </div>
+
+  <!-- FICHA 1: 5-7 AÑOS -->
+  <div class="page">
+    <h1>🤖 Ficha de Trabajo: Robótica</h1>
+    <div class="subtitle">Sesión 4B: El Cofre del Tesoro (5–7 años)</div>
+    
+    <div class="info-box">
+      <span><b>Nombre:</b> <span class="line"></span></span>
+      <span><b>Fecha:</b> ____________</span>
+    </div>
+
+    <div class="card c-a">
+      <h3>🎨 1. Colorear las Rutas del Circuito</h3>
+      <p>Selecciona un color e interactúa con el diagrama antes de colorearlo en físico:</p>
+      
+      <div class="pal no-print-bar" id="pal"></div>
+      
+      <svg class="col" viewBox="0 0 600 240" id="svg">
+        <rect class="c" x="40" y="80" width="140" height="90" />
+        <path class="c" d="M40 80 Q110 30 180 80Z" />
+        <circle class="c" cx="110" cy="110" r="12" />
+        <circle class="c" cx="60" cy="30" r="14" />
+        <rect class="c" x="74" y="24" width="30" height="10" />
+        <circle class="c" cx="130" cy="30" r="14" />
+        <circle class="c" cx="280" cy="110" r="25" />
+        <rect class="c" x="380" y="90" width="180" height="60" />
+        <path class="c" d="M385 150Q425 70 465 150Z" />
+        <path class="c" d="M475 150Q515 70 555 150Z" />
+        <text x="40" y="200" font-size="14">SERIE: 2 Llaves</text>
+        <text x="265" y="200" font-size="14">Luz</text>
+        <text x="390" y="200" font-size="14">ESCALERA: 2 Puentes</text>
+      </svg>
+
+      <p style="margin-top: 0.8rem;">
+        • Llaves del cofre: <b>Amarillo</b> 🟡 &nbsp;&nbsp; 
+        • Luz encendida: <b>Verde</b> 🟢 &nbsp;&nbsp; 
+        • Puentes: <b>Colores libres</b>
+      </p>
+    </div>
+
+    <div class="card c-a">
+      <h3>✏️ 2. Registro de Pruebas Directas</h3>
+      <p>Marca con un círculo la respuesta según el estado del LED:</p>
+      <table>
+        <tr>
+          <th>Configuración</th>
+          <th>Botón 1</th>
+          <th>Botón 2</th>
+          <th>¿Enciende la Luz?</th>
+        </tr>
+        <tr>
+          <td>Serie</td>
+          <td>Presionado 👇</td>
+          <td>Suelto ✋</td>
+          <td>🟢 SÍ &nbsp;&nbsp;/&nbsp;&nbsp; 🔴 NO</td>
+        </tr>
+        <tr>
+          <td>Serie</td>
+          <td>Presionado 👇</td>
+          <td>Presionado 👇</td>
+          <td>🟢 SÍ &nbsp;&nbsp;/&nbsp;&nbsp; 🔴 NO</td>
+        </tr>
+        <tr>
+          <td>Escalera</td>
+          <td>Presionado 👇</td>
+          <td>Suelto ✋</td>
+          <td>🟢 SÍ &nbsp;&nbsp;/&nbsp;&nbsp; 🔴 NO</td>
+        </tr>
+        <tr>
+          <td>Escalera</td>
+          <td>Suelto ✋</td>
+          <td>Suelto ✋</td>
+          <td>🟢 SÍ &nbsp;&nbsp;/&nbsp;&nbsp; 🔴 NO</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- FICHA 2: 7-9 AÑOS -->
+  <div class="page">
+    <h1>🤖 Ficha de Trabajo: Robótica</h1>
+    <div class="subtitle">Sesión 4B: Co-op vs. Atajo Independiente (7–9 años)</div>
+    
+    <div class="info-box">
+      <span><b>Nombre:</b> <span class="line"></span></span>
+      <span><b>Fecha:</b> ____________</span>
+    </div>
+
+    <div class="card c-b">
+      <h3>📊 1. Tabla de Comprobación y Predicción</h3>
+      <p>Completa las casillas escribiendo <b>ENCIENDE</b> o <b>APAGADO</b>:</p>
+      <table>
+        <tr>
+          <th>Botón A</th>
+          <th>Botón B</th>
+          <th>Serie (Predicción)</th>
+          <th>Serie (Real)</th>
+          <th>Escalera (Predicción)</th>
+          <th>Escalera (Real)</th>
+        </tr>
+        <tr>
+          <td>Suelto</td>
+          <td>Suelto</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>Presionado</td>
+          <td>Suelto</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>Suelto</td>
+          <td>Presionado</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>Presionado</td>
+          <td>Presionado</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="card c-b">
+      <h3>💡 2. Taller del Inventor (Análisis de Casos)</h3>
+      <p>Selecciona y escribe qué tipo de circuito (<b>SERIE</b> o <b>ESCALERA</b>) se requiere:</p>
+      <ol>
+        <li>Una caja fuerte que exige presionar dos botones distantes al mismo tiempo: <span class="line"></span></li>
+        <li>Un timbre con un botón en la puerta principal y otro en el patio: <span class="line"></span></li>
+        <li>Una trituradora que requiere colocar la tapa y accionar la palanca: <span class="line"></span></li>
+      </ol>
+    </div>
+
+    <div class="card c-b">
+      <h3>🕵️ 3. Protocolo de Diagnóstico</h3>
+      <p>Si el circuito no enciende al presionar los botones, menciona 3 puntos a revisar:</p>
+      <p>1. <span class="line"></span> 2. <span class="line"></span> 3. <span class="line"></span></p>
+    </div>
+  </div>
+
+  <!-- FICHA 3: 9-11 AÑOS -->
+  <div class="page">
+    <h1>🤖 Ficha de Trabajo: Robótica</h1>
+    <div class="subtitle">Sesión 4B: Compuertas Lógicas AND y OR (9–11 años)</div>
+    
+    <div class="info-box">
+      <span><b>Nombre:</b> <span class="line"></span></span>
+      <span><b>Fecha:</b> ____________</span>
+    </div>
+
+    <div class="card c-c">
+      <h3>⚡ 1. Tablas de Verdad Binarias</h3>
+      <p>Determina la salida lógica (0 = Apagado, 1 = Encendido):</p>
+      <table>
+        <tr>
+          <th colspan="2">Entradas</th>
+          <th>Compuerta AND (Serie)</th>
+          <th>Compuerta OR (Escalera)</th>
+        </tr>
+        <tr>
+          <th>A</th>
+          <th>B</th>
+          <th>Salida = A · B</th>
+          <th>Salida = A + B</th>
+        </tr>
+        <tr>
+          <td>0</td>
+          <td>0</td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>0</td>
+          <td>1</td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td>0</td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td>1</td>
+          <td></td>
+          <td></td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="card c-c">
+      <h3>⚙️ 2. Aplicación de Álgebra Booleana</h3>
+      <p><b>A)</b> Con 3 entradas binarias, calcula el número total de combinaciones posibles (2ⁿ): <span class="line"></span></p>
+      <p><b>B)</b> Indica la función lógica correspondiente (AND o OR):</p>
+      <ul>
+        <li>Un cajero automático requiere tarjeta válida Y clave secreta: <span class="line"></span></li>
+        <li>Un auto enciende la luz interna si la puerta izquierda O la derecha se abren: <span class="line"></span></li>
+      </ul>
+    </div>
+
+    <div class="card c-c">
+      <h3>🏆 3. Desafío Combinado: Circuitos Complejos</h3>
+      <p>Dada la función Salida = (A · B) + C, indica los casos en los que la salida será <b>1</b>:</p>
+      <p><span class="line" style="width: 100%;"></span></p>
+    </div>
+  </div>
+
+  <script>
+    var cols = ["#facc15", "#4ade80", "#38bdf8", "#f87171", "#c084fc", "#ffffff"],
+      cur = cols[0],
+      pal = document.getElementById("pal");
+    
+    if (pal) {
+      cols.forEach(function (c) {
+        var b = document.createElement("button");
+        b.style.background = c;
+        b.onclick = function () { cur = c; };
+        pal.appendChild(b);
+      });
+      
+      document.querySelectorAll("#svg .c").forEach(function (e) {
+        e.onclick = function () { e.style.fill = cur; };
+      });
+    }
+  </script>
+</body>
+</html>

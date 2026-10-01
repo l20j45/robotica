@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Clase - Sesión 4B: Botones en Serie y Escalera</title>
+  <style>
+    :root {
+      --bg: #fff8e7;
+      --card: #ffffff;
+      --ink: #1e293b;
+      --sub: #475569;
+      --y: #f59e0b;
+      --g: #16a34a;
+      --p: #9333ea;
+      --b: #0284c7;
+      --line: #e2e8f0;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0f172a;
+        --card: #1e293b;
+        --ink: #f8fafc;
+        --sub: #94a3b8;
+        --line: #334155;
+      }
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'Comic Sans MS', 'Chalkboard SE', 'Segoe UI', sans-serif;
+      line-height: 1.5;
+      padding: 1rem;
+    }
+    main {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    h1 {
+      font-size: 1.8rem;
+      text-align: center;
+      margin: 0.5rem 0 1rem 0;
+    }
+    h2 {
+      font-size: 1.4rem;
+      margin-bottom: 0.6rem;
+    }
+    h3 {
+      font-size: 1.1rem;
+      margin: 0.8rem 0 0.3rem 0;
+      color: var(--c, var(--b));
+    }
+    p, li {
+      margin-bottom: 0.4rem;
+    }
+    ul, ol {
+      margin-left: 1.3rem;
+    }
+    nav {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 1rem;
+    }
+    nav button {
+      font-family: inherit;
+      font-weight: bold;
+      padding: 0.6rem 1rem;
+      border-radius: 14px;
+      border: 2px solid var(--line);
+      background: var(--card);
+      color: var(--ink);
+      cursor: pointer;
+    }
+    nav button.on {
+      background: var(--c);
+      color: #ffffff;
+      border-color: var(--c);
+    }
+    section {
+      display: none;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-top: 6px solid var(--c);
+      border-radius: 20px;
+      padding: 1.4rem;
+    }
+    section.on {
+      display: block;
+    }
+    .box {
+      border: 2px dashed var(--c);
+      border-radius: 14px;
+      padding: 0.8rem 1rem;
+      margin: 0.8rem 0;
+    }
+    .wrap {
+      overflow-x: auto;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      min-width: 320px;
+    }
+    th, td {
+      border: 2px solid var(--c);
+      padding: 0.6rem;
+      text-align: center;
+    }
+    th {
+      background: rgba(2, 132, 199, 0.15);
+    }
+    .tl td:first-child {
+      white-space: nowrap;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>🔀 GUÍA DOCENTE: Sesión 4B (Botones en Serie y Escalera)</h1>
+    <nav>
+      <button class="on" style="--c: #0284c7;" onclick="showTab('plan', this)">📋 Visión General</button>
+      <button style="--c: #f59e0b;" onclick="showTab('a', this)">⭐ 5–7 años</button>
+      <button style="--c: #16a34a;" onclick="showTab('b', this)">🚀 7–9 años</button>
+      <button style="--c: #9333ea;" onclick="showTab('c', this)">⚙️ 9–11 años</button>
+    </nav>
+
+    <!-- PLAN GENERAL -->
+    <section id="plan" class="on" style="--c: #0284c7;">
+      <h2>📋 Plan General de la Sesión (1 h 30 min)</h2>
+      <p>Esta estructura guía al docente para adaptar la explicación teórica, la dinámica corporal y el montaje según la edad de los niños.</p>
+      
+      <h3>💡 Idea Central</h3>
+      <p><b>Serie:</b> Un solo camino continuo; se deben presionar <b>ambos</b> botones para cerrar el circuito.<br><b>Escalera (paralelo):</b> Rutas independientes; basta con presionar <b>uno</b> para permitir el paso de corriente.</p>
+
+      <h3>🧰 Materiales por Equipo (2–3 alumnos)</h3>
+      <ul>
+        <li>Protoboard y fuente de alimentación (5 V / 3 pilas AA).</li>
+        <li>2 pulsadores, 1 LED, 1 resistencia de 220 Ω y cables de conexión.</li>
+        <li>Fichas de actividades impresas.</li>
+      </ul>
+
+      <h3>⚠️ Normas de Seguridad</h3>
+      <ul>
+        <li>Asegurar siempre la resistencia en serie con el LED para evitar sobrecalentamiento.</li>
+        <li>Revisar el circuito antes de conectar la fuente de voltaje.</li>
+      </ul>
+    </section>
+
+    <!-- GRUPO 5-7 AÑOS -->
+    <section id="a" style="--c: #f59e0b;">
+      <h2>⭐ Guía de Clase: 5–7 años</h2>
+      <div class="wrap">
+        <table class="tl">
+          <tr><th>Min</th><th>Etapa</th><th>Acción del Docente</th></tr>
+          <tr><td>0–10</td><td>🤝 Cadena humana</td><td style="text-align: left;">Explicar continuidad formando un circuito con las manos de los alumnos.</td></tr>
+          <tr><td>10–20</td><td>📖 Cuento</td><td style="text-align: left;">Relato «El Rey y el Cofre»: 2 cerraduras (serie) vs. 2 puentes del castillo (escalera).</td></tr>
+          <tr><td>20–45</td><td>🎨 Dinámica gráfica</td><td style="text-align: left;">Guiar el coloreado e identificación de rutas en la ficha impresa.</td></tr>
+          <tr><td>45–50</td><td>🤸 Pausa activa</td><td style="text-align: left;">Descanso y ejercicios de estiramiento.</td></tr>
+          <tr><td>50–75</td><td>🛠️ Práctica</td><td style="text-align: left;">Supervisar el armado del circuito en protoboard paso a paso.</td></tr>
+          <tr><td>75–90</td><td>✏️ Cierre</td><td style="text-align: left;">Evaluación gráfica en la ficha e inventario de material.</td></tr>
+        </table>
+      </div>
+
+      <div class="box">
+        <h3>🤝 Calentamiento: Cadena Humana</h3>
+        <ol>
+          <li>Formar una fila sujetándose de las manos (Pila 🔋 al inicio, Luz 💡 al final).</li>
+          <li>Simular el paso de corriente mediante un apretón de manos continuo.</li>
+          <li>Interrumpir la cadena en un punto para ejemplificar el circuito abierto.</li>
+          <li>Formar dos caminos paralelos para mostrar la alternativa en escalera.</li>
+        </ol>
+      </div>
+
+      <div class="box">
+        <h3>🛠️ Instrucciones de Armado (Protoboard)</h3>
+        <ol>
+          <li>Insertar el LED ubicando la terminal mayor (ánodo).</li>
+          <li>Conectar la resistencia de 220 Ω en serie con el ánodo.</li>
+          <li>Colocar el cable rojo desde la fuente al primer pulsador.</li>
+          <li><b>Serie:</b> Enlazar la salida del primer pulsador a la entrada del segundo.</li>
+          <li><b>Escalera:</b> Alimentar ambos pulsadores desde la línea positiva y derivar ambas salidas a la resistencia.</li>
+          <li>Conectar el cable negro desde el cátodo del LED al polo negativo.</li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- GRUPO 7-9 AÑOS -->
+    <section id="b" style="--c: #16a34a;">
+      <h2>🚀 Guía de Clase: 7–9 años</h2>
+      <div class="wrap">
+        <table class="tl">
+          <tr><th>Min</th><th>Etapa</th><th>Acción del Docente</th></tr>
+          <tr><td>0–10</td><td>🚪 Dinámica de control</td><td style="text-align: left;">Juego de roles "Puerta con dos guardias" para introducir condiciones.</td></tr>
+          <tr><td>10–20</td><td>🧠 Teoría aplicada</td><td style="text-align: left;">Diferencia entre trabajo cooperativo (serie) y atajo independiente (paralelo).</td></tr>
+          <tr><td>20–50</td><td>🛠️ Reto técnico</td><td style="text-align: left;">Montaje del circuito "Luz de la Escalera" y análisis de estados.</td></tr>
+          <tr><td>50–70</td><td>✏️ Predicción</td><td style="text-align: left;">Llenado de tablas de predicción vs. medición real.</td></tr>
+          <tr><td>70–90</td><td>💡 Desafío</td><td style="text-align: left;">Resolución de casos hipotéticos con las tarjetas del inventor.</td></tr>
+        </table>
+      </div>
+
+      <div class="box">
+        <h3>🚪 Juego de Roles: Puerta con Dos Guardias</h3>
+        <ol>
+          <li>Designar un alumno como "Puerta" y dos como "Guardias A y B".</li>
+          <li><b>Modo Serie:</b> La puerta permite el paso únicamente si ambos guardias dan la señal.</li>
+          <li><b>Modo Escalera:</b> La puerta permite el paso si al menos uno de los guardias da la señal.</li>
+        </ol>
+      </div>
+
+      <div class="box">
+        <h3>🛠️ Instrucciones de Armado</h3>
+        <p><b>Serie:</b> Cablear la corriente a través de A y B en línea recta hacia el receptor.</p>
+        <p><b>Escalera:</b> Conectar A y B compartiendo el nodo de entrada (+5V) y el nodo de salida hacia la carga.</p>
+      </div>
+    </section>
+
+    <!-- GRUPO 9-11 AÑOS -->
+    <section id="c" style="--c: #9333ea;">
+      <h2>⚙️ Guía de Clase: 9–11 años</h2>
+      <div class="wrap">
+        <table class="tl">
+          <tr><th>Min</th><th>Etapa</th><th>Acción del Docente</th></tr>
+          <tr><td>0–10</td><td>🖥️ Lógica digital</td><td style="text-align: left;">Simulación de compuertas lógicas mediante dinámica corporal.</td></tr>
+          <tr><td>10–20</td><td>🧠 Formalización</td><td style="text-align: left;">Explicación de funciones algebraicas A · B (AND) y A + B (OR).</td></tr>
+          <tr><td>20–50</td><td>🛠️ Laboratorio</td><td style="text-align: left;">Construcción de circuitos y validación experimental de tablas de verdad.</td></tr>
+          <tr><td>50–70</td><td>🏆 Complejidad</td><td style="text-align: left;">Diseño y análisis del circuito combinado (A · B) + C.</td></tr>
+          <tr><td>70–90</td><td>✏️ Reporte</td><td style="text-align: left;">Sombra técnica en la ficha de trabajo.</td></tr>
+        </table>
+      </div>
+
+      <div class="box">
+        <h3>🖥️ Dinámica: Computadora Humana</h3>
+        <ol>
+          <li>Designar entradas A y B (0 = Mano abajo, 1 = Mano arriba) y una salida "Compuerta".</li>
+          <li>Evaluar combinaciones binarias 00, 01, 10, 11 para la función AND (A · B).</li>
+          <li>Evaluar combinaciones para la función OR (A + B).</li>
+        </ol>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    function showTab(id, btn) {
+      const buttons = document.querySelectorAll('nav button');
+      const sections = document.querySelectorAll('section');
+      
+      buttons.forEach(b => b.classList.remove('on'));
+      sections.forEach(s => s.classList.remove('on'));
+      
+      btn.classList.add('on');
+      document.getElementById(id).classList.add('on');
+    }
+  </script>
+</body>
+</html>
