@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Clase: Alarma de Buzzer en Paralelo</title>
+<style>
+:root{--bg:#fff8e7;--card:#fff;--ink:#1e293b;--sub:#475569;--line:#e2e8f0;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f172a;--card:#1e293b;--ink:#f8fafc;--sub:#94a3b8;--line:#334155}}
+:root[data-theme="dark"]{--bg:#0f172a;--card:#1e293b;--ink:#f8fafc;--sub:#94a3b8;--line:#334155}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{background:var(--bg);color:var(--ink);font-family:'Comic Sans MS','Chalkboard SE','Segoe UI',system-ui,sans-serif;line-height:1.5;padding:1rem}
+main{max-width:900px;margin:auto}
+h1{font-size:1.7rem;text-align:center;margin:.4rem 0 .8rem}
+h2{font-size:1.35rem;margin-bottom:.5rem}
+h3{font-size:1.05rem;margin:.9rem 0 .3rem;color:var(--c)}
+p,li{margin-bottom:.4rem}
+ul,ol{margin-left:1.3rem}
+nav{display:flex;gap:.5rem;flex-wrap:wrap;justify-content:center;margin-bottom:1rem}
+nav button{font:inherit;font-weight:bold;padding:.6rem 1rem;border-radius:14px;border:2px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer}
+nav button.on{background:var(--c);color:#fff;border-color:var(--c)}
+section{display:none;background:var(--card);border:1px solid var(--line);border-top:6px solid var(--c);border-radius:20px;padding:1.3rem}
+section.on{display:block}
+.box{border:2px dashed var(--c);border-radius:14px;padding:.8rem 1rem;margin:.8rem 0}
+.wrap{overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:320px}
+th,td{border:2px solid var(--c);padding:.5rem;text-align:center}
+th{background:color-mix(in srgb,var(--c) 20%,transparent)}
+.tl td:first-child{white-space:nowrap;font-weight:bold}
+.tl td:nth-child(3),.l td{text-align:left}
+pre{background:color-mix(in srgb,var(--c) 12%,transparent);border-radius:10px;padding:.8rem;overflow-x:auto;font-size:.95rem;margin:.5rem 0}
+.line{border-bottom:2px solid var(--sub);display:inline-block;min-width:160px}
+.pr{text-align:center;margin:1rem 0}
+.pr button{font:inherit;padding:.5rem 1.2rem;border-radius:12px;border:0;background:#f59e0b;font-weight:bold;cursor:pointer}
+@media print{nav,.pr,.noprint{display:none}section{display:block!important;break-after:page;border:0}.fp{break-before:page}body{background:#fff;color:#000}}
+</style>
+</head>
+<body>
+<main>
+<h1>🔊 Alarma de Buzzer con 2 Botones en Paralelo</h1>
+<nav>
+<button class="on" style="--c:#0284c7" data-t="plan">📋 Explicación y armado</button>
+<button style="--c:#f59e0b" data-t="a">⭐ 5–7 años</button>
+<button style="--c:#16a34a" data-t="b">🚀 7–9 años</button>
+<button style="--c:#9333ea" data-t="c">⚙️ 9–11 años</button>
+</nav>
+
+<section id="plan" class="on" style="--c:#0284c7">
+<h2>📋 Visión general (1 h 30 min por grupo)</h2>
+<p>La clase anterior fue <b>serie</b>. Hoy es <b>solo paralelo</b>, con un buzzer en lugar del LED: el sonido confirma al instante que cualquiera de los dos botones activa la alarma.</p>
+
+<h3>🗣️ Explicación detallada (qué decir y en qué orden)</h3>
+<ol>
+<li><b>Recordar (2 min):</b> «En serie había un solo camino. Si un botón estaba suelto, el camino se cortaba y nada funcionaba.»</li>
+<li><b>La idea nueva (3 min):</b> «Hoy habrá <b>dos caminos</b> desde la pila hasta el buzzer. La energía puede ir por cualquiera. Si un botón está suelto, ese camino está cerrado, pero el otro sigue abierto.»</li>
+<li><b>Analogía (2 min):</b> una habitación con dos puertas. Para entrar basta una; si una está cerrada, entras por la otra. (Mayores: dos llaves de agua que llenan el mismo balde.)</li>
+<li><b>Dibujo en pizarra (3 min):</b> señalar con el dedo cada camino.</li>
+</ol>
+<pre>      ┌──[ Botón A ]──┐
+ (+)──┤               ├──► Buzzer ──(−)
+      └──[ Botón B ]──┘
+ nodo de entrada    nodo de salida</pre>
+<ol start="5">
+<li><b>La protoboard (5 min):</b> los 5 agujeros de una misma columna están unidos por dentro, como un cable invisible. Un <b>nodo</b> es un punto donde se unen cables. Hoy hay 2 nodos: el de <b>entrada</b> (+) y el de <b>salida</b> (hacia el buzzer). Cada botón conecta esos dos nodos por su cuenta.</li>
+<li><b>El botón de 4 patas (2 min):</b> las dos patas del mismo lado están unidas siempre; al presionar, se unen las patas de lados opuestos. Por eso va <b>cruzando la zanja central</b>.</li>
+</ol>
+
+<h3>🧰 Materiales por equipo (2–3 niños)</h3>
+<ul><li>Protoboard, fuente de 5 V (o 3 pilas AA)</li><li>2 pulsadores de 4 patas</li><li>1 buzzer <b>activo</b> de 5 V (el pasivo no suena con corriente directa)</li><li>1 cable rojo, 1 negro y 3 amarillos</li></ul>
+
+<h3>🛠️ Armado paso a paso</h3>
+<ol>
+<li>Coloca el <b>Botón A</b> cruzando la zanja central, y el <b>Botón B</b> igual, unas columnas más allá.</li>
+<li><b>Cable rojo:</b> del + de la fuente al riel + de la protoboard.</li>
+<li><b>Cable amarillo 1:</b> del riel + a la columna de una pata de <b>arriba</b> del Botón A. <b>Amarillo 2:</b> del riel + a una pata de arriba del Botón B. (Entrada compartida.)</li>
+<li>Elige una columna libre de <b>abajo</b>: será el <b>nodo de salida</b>. <b>Amarillo 3 y 4:</b> de una pata de abajo del Botón A, y de una pata de abajo del Botón B, a esa columna.</li>
+<li>Pon la <b>pata larga (+) del buzzer</b> en esa misma columna del nodo de salida.</li>
+<li>Pon la <b>pata corta (−)</b> en otra columna y únela con un <b>cable negro</b> al − de la fuente.</li>
+<li>Pide la revisión al docente. Luego conecta la fuente y prueba cada botón por separado.</li>
+</ol>
+<p class="noprint"><i>Nota: son 4 cables amarillos si se arma como describe; reparte los cables del kit en consecuencia.</i></p>
+
+<h3>🕵️ Si algo falla</h3>
+<div class="wrap"><table class="l">
+<tr><th>Síntoma</th><th>Causa probable</th><th>Solución</th></tr>
+<tr><td>Suena siempre</td><td>Botón mal orientado</td><td>Girarlo 90° para que cruce la zanja</td></tr>
+<tr><td>No suena nunca</td><td>Buzzer al revés o cable flojo</td><td>Pata larga al nodo de salida; revisar rojo y negro</td></tr>
+<tr><td>Solo un botón funciona</td><td>El otro no llega a los dos nodos</td><td>Revisar sus dos cables amarillos</td></tr>
+<tr><td>Se calienta algo</td><td>Rojo y negro se tocan</td><td>Desconectar la fuente de inmediato</td></tr>
+</table></div>
+<h3>⚠️ Seguridad</h3>
+<p>No acercar el buzzer al oído. Conectar la fuente al final y desconectarla primero.</p>
+<div class="pr"><button onclick="window.print()">🖨️ Imprimir guía y fichas</button></div>
+</section>
+
+<section id="a" style="--c:#f59e0b">
+<h2>⭐ 5–7 años: La Casita Segura</h2>
+<div class="wrap"><table class="tl"><tr><th>Min</th><th>Actividad</th><th>Qué hacer</th></tr>
+<tr><td>0–10</td><td>🔔 Timbre humano</td><td>Ver abajo.</td></tr>
+<tr><td>10–20</td><td>📖 Cuento</td><td>«Dos puertas, una campana» (abajo).</td></tr>
+<tr><td>20–30</td><td>🔍 Conocer las piezas</td><td>Oír el buzzer con la pila; pegar un punto rojo en la pata larga (+).</td></tr>
+<tr><td>30–35</td><td>🤸 Pausa</td><td>Estirarse y tomar agua.</td></tr>
+<tr><td>35–70</td><td>🛠️ Armar la casita</td><td>Los niños arman con la guía de pasos y pegan letreros «PUERTA» y «PATIO» junto a cada botón.</td></tr>
+<tr><td>70–80</td><td>🕵️ Guardia y visitante</td><td>Ver abajo.</td></tr>
+<tr><td>80–85</td><td>✏️ Ficha</td><td>Círculo en SÍ o NO.</td></tr>
+<tr><td>85–90</td><td>🧹 Limpieza</td><td>Guardar todo por colores.</td></tr></table></div>
+<div class="box"><h3>🔔 Calentamiento: timbre humano (10 min)</h3>
+<p><b>Para qué:</b> entender con el cuerpo que «cualquiera» hace sonar el timbre. Material: dos cintas en el piso como puertas.</p>
+<ol><li>Marca dos puertas en el piso: <b>PUERTA</b> y <b>PATIO</b>. Un niño es la <b>campana</b> y está dentro de la casa.</li>
+<li>Los demás son visitantes. Al llegar a cualquier puerta dicen «¡toc toc!» y la campana hace «¡DING DING!».</li>
+<li>El docente cierra una puerta con una X de cinta: «La puerta se descompuso». Los visitantes usan la otra y la campana suena igual.</li>
+<li>Pregunta: «¿Hubo que tocar las dos puertas para que sonara?». No: <b>con una basta</b>.</li></ol></div>
+<div class="box"><h3>📖 Cuento: «Dos puertas, una campana»</h3>
+<p>Una casita tiene una puerta al frente y otra al patio, pero una sola campana. El cartero llega por el frente: ¡DING! Luego el vecino entra por el patio: ¡DING! Un día el cartero rompe la puerta del frente. ¿Ya no hay campana? ¡Sí hay! Porque el patio sigue funcionando. Pregunta: «¿Cuántas puertas necesita tocar alguien para que suene?».</p></div>
+<div class="box"><h3>🕵️ Juego: guardia y visitante (10 min)</h3>
+<p>Un niño es el <b>visitante</b> y presiona los botones; otro es el <b>guardia</b> y escucha con los ojos cerrados diciendo «¡suena!» o «¡silencio!». Probar: solo PUERTA, solo PATIO, los dos, ninguno. Después el docente «descompone» una puerta quitando un cable amarillo: ¿se puede entrar por la otra? Rotar los roles.</p></div>
+<div class="box fp"><h3>✏️ Ficha: Nombre <span class="line"></span></h3>
+<p>Circula SÍ o NO para saber si suena el buzzer:</p>
+<div class="wrap"><table><tr><th>PUERTA</th><th>PATIO</th><th>¿Suena?</th></tr>
+<tr><td>👇</td><td>✋</td><td>🔊 SÍ / 🔇 NO</td></tr><tr><td>✋</td><td>👇</td><td>🔊 SÍ / 🔇 NO</td></tr>
+<tr><td>👇</td><td>👇</td><td>🔊 SÍ / 🔇 NO</td></tr><tr><td>✋</td><td>✋</td><td>🔊 SÍ / 🔇 NO</td></tr></table></div>
+<p>👇 presionado &nbsp; ✋ suelto</p></div>
+</section>
+
+<section id="b" style="--c:#16a34a">
+<h2>🚀 7–9 años: Alarma de la Casa y Detective de Fallas</h2>
+<div class="wrap"><table class="tl"><tr><th>Min</th><th>Actividad</th><th>Qué hacer</th></tr>
+<tr><td>0–10</td><td>🚨 Alarma humana</td><td>Ver abajo.</td></tr>
+<tr><td>10–25</td><td>🧠 Explicación</td><td>Usar la explicación detallada de la pestaña general, con el dibujo en pizarra y los nodos.</td></tr>
+<tr><td>25–60</td><td>🛠️ Armado</td><td>Armar con la guía de pasos. Probar cada botón por separado.</td></tr>
+<tr><td>60–65</td><td>🤸 Pausa</td><td>Tomar agua.</td></tr>
+<tr><td>65–80</td><td>🕵️ Detective de fallas</td><td>Ver abajo.</td></tr>
+<tr><td>80–85</td><td>✏️ Ficha</td><td>Tabla de registro y reto de independencia.</td></tr>
+<tr><td>85–90</td><td>🧹 Orden</td><td>Inventario y limpieza.</td></tr></table></div>
+<div class="box"><h3>🚨 Calentamiento: alarma humana (10 min)</h3>
+<p><b>Para qué:</b> descubrir antes de armar que dos sensores independientes activan una sola alarma.</p>
+<ol><li>Grupos de 3: <b>sensor A</b>, <b>sensor B</b> y <b>alarma</b>.</li>
+<li>La alarma grita «¡BIP!» si <b>cualquiera</b> de los dos sensores levanta la mano.</li>
+<li>Ronda de predicción: el docente dice una combinación («A arriba, B abajo») y el equipo predice antes de hacerla.</li>
+<li>Se «rompe» un sensor (cruza los brazos y no puede moverse): ¿el otro sigue activando la alarma?</li>
+<li>Rotar los roles.</li></ol></div>
+<div class="box"><h3>🕵️ Actividad: Detective de fallas (15 min)</h3>
+<ol><li>Cada equipo prueba su alarma y confirma que funciona.</li>
+<li>Con los ojos cerrados de los demás, un integrante del equipo siembra <b>una falla</b>: gira un botón, quita un cable amarillo, o invierte el buzzer.</li>
+<li>Los equipos rotan a la estación siguiente y deben encontrar la falla usando la tabla «Si algo falla».</li>
+<li>Se anota la falla y la solución en la ficha. Gana el equipo que descubra más fallas con menos pruebas.</li>
+<li>Cierre: quitar el Botón A del todo. ¿El B sigue funcionando? Sí: eso es la independencia del paralelo.</li></ol></div>
+<div class="box fp"><h3>✏️ Ficha: Nombre <span class="line"></span></h3>
+<div class="wrap"><table><tr><th>Botón A</th><th>Botón B</th><th>Predicción</th><th>Real</th></tr>
+<tr><td>suelto</td><td>suelto</td><td></td><td></td></tr><tr><td>presionado</td><td>suelto</td><td></td><td></td></tr>
+<tr><td>suelto</td><td>presionado</td><td></td><td></td></tr><tr><td>presionado</td><td>presionado</td><td></td><td></td></tr></table></div>
+<p style="margin-top:.6rem">Falla que encontré: ______________ &nbsp; Cómo la arreglé: ______________</p>
+<p>Si quito el Botón A, ¿el B sigue activando la alarma? ¿Por qué? <span class="line" style="width:100%"></span></p></div>
+</section>
+
+<section id="c" style="--c:#9333ea">
+<h2>⚙️ 9–11 años: Sistema de Seguridad de 3 Sensores (OR)</h2>
+<div class="wrap"><table class="tl"><tr><th>Min</th><th>Actividad</th><th>Qué hacer</th></tr>
+<tr><td>0–10</td><td>🖥️ Computadora humana OR</td><td>Ver abajo.</td></tr>
+<tr><td>10–25</td><td>🧠 Explicación</td><td>Explicación general más la parte de voltaje (abajo).</td></tr>
+<tr><td>25–55</td><td>🛠️ Armado con 2 botones</td><td>Armar con la guía y medir las 4 combinaciones.</td></tr>
+<tr><td>55–60</td><td>🤸 Pausa</td><td>Tomar agua.</td></tr>
+<tr><td>60–75</td><td>🏆 Tercer sensor</td><td>Agregar el botón C (ventana) en paralelo; tabla de 8 filas.</td></tr>
+<tr><td>75–85</td><td>⚖️ OR contra AND</td><td>Pasar los botones a serie por 5 min y comparar.</td></tr>
+<tr><td>85–90</td><td>🧹 Orden</td><td>Limpieza y ficha de cierre.</td></tr></table></div>
+<div class="box"><h3>🖥️ Calentamiento: computadora humana OR (10 min)</h3>
+<ol><li>Grupos de 3: <b>A</b>, <b>B</b> y la <b>compuerta OR</b>. Mano arriba = 1, abajo = 0.</li>
+<li>La compuerta levanta la mano si A <b>o</b> B (o ambos) están arriba.</li>
+<li>Un compañero anota en el pizarrón las 4 combinaciones: 00, 01, 10, 11.</li>
+<li>Pregunta: ¿en cuántas de las 4 filas es 1 la salida? Esa será la tabla de verdad que verificarán con el circuito.</li></ol></div>
+<div class="box"><h3>🧠 Parte extra de la explicación: voltaje</h3>
+<p>Los botones son solo interruptores: no producen energía, solo abren o cierran caminos. Los dos caminos salen del mismo punto (+5 V) y llegan al mismo buzzer. Por eso el buzzer recibe los mismos 5 V con un botón o con dos: <b>no suena más fuerte</b> si presionas ambos. La salida es 1 si <b>al menos una</b> entrada es 1: Salida = A + B.</p></div>
+<div class="box"><h3>🏆 Desafío del tercer sensor (15 min)</h3>
+<p>Agrega el Botón C en paralelo (mismos dos nodos). Antes de probar, predice: ¿en cuántas de las 8 combinaciones sonará el buzzer? (Respuesta: 7). Después, en serie, ¿cuántas? (Respuesta: 1). Llenen la tabla y expliquen la diferencia con sus palabras.</p></div>
+<div class="box fp"><h3>✏️ Ficha: Nombre <span class="line"></span></h3>
+<div class="wrap"><table><tr><th>A</th><th>B</th><th>C</th><th>OR (paralelo)</th><th>AND (serie)</th></tr>
+<tr><td>0</td><td>0</td><td>0</td><td></td><td></td></tr><tr><td>0</td><td>0</td><td>1</td><td></td><td></td></tr>
+<tr><td>0</td><td>1</td><td>0</td><td></td><td></td></tr><tr><td>0</td><td>1</td><td>1</td><td></td><td></td></tr>
+<tr><td>1</td><td>0</td><td>0</td><td></td><td></td></tr><tr><td>1</td><td>0</td><td>1</td><td></td><td></td></tr>
+<tr><td>1</td><td>1</td><td>0</td><td></td><td></td></tr><tr><td>1</td><td>1</td><td>1</td><td></td><td></td></tr></table></div>
+<p style="margin-top:.6rem">¿Por qué el buzzer no suena más fuerte con dos botones presionados? <span class="line" style="width:100%"></span></p></div>
+</section>
+</main>
+<script>
+var btns=document.querySelectorAll('nav button'),secs=document.querySelectorAll('section');
+btns.forEach(function(b){b.onclick=function(){btns.forEach(function(x){x.classList.remove('on')});secs.forEach(function(s){s.classList.remove('on')});b.classList.add('on');document.getElementById(b.dataset.t).classList.add('on')}});
+</script>
+</body>
+</html>

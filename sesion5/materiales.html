@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Materiales y Fichas Imprimibles - Sesión Buzzer en Paralelo</title>
+<style>
+@page { size: letter portrait; margin: 1.2cm; }
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Arial, sans-serif; }
+body { background: #ffffff; color: #0f172a; line-height: 1.4; padding: 1rem; }
+.page { width: 100%; max-width: 800px; margin: 0 auto 2rem auto; padding: 1.5rem; border: 2px dashed #cbd5e1; border-radius: 12px; page-break-after: always; }
+.no-print-bar { background: #0284c7; color: #ffffff; padding: 1rem; text-align: center; margin-bottom: 1.5rem; border-radius: 8px; }
+.no-print-bar button { font-size: 1rem; font-weight: bold; padding: 0.6rem 1.2rem; background: #f59e0b; border: none; color: #ffffff; border-radius: 8px; cursor: pointer; }
+h1 { font-size: 1.4rem; color: #0284c7; text-align: center; text-transform: uppercase; margin-bottom: 0.2rem; }
+h2 { font-size: 1.1rem; color: #334155; margin: 0.8rem 0 0.4rem; border-bottom: 2px solid #cbd5e1; padding-bottom: 0.2rem; }
+.subtitle { text-align: center; font-weight: bold; color: #475569; margin-bottom: 1rem; }
+.info-box { border: 1px solid #cbd5e1; padding: 0.6rem 1rem; border-radius: 8px; margin-bottom: 1rem; display: flex; justify-content: space-between; }
+.card { border-radius: 12px; padding: 1rem; margin-bottom: 1rem; border: 2px solid #e2e8f0; }
+.c-a { border-color: #f59e0b; background: #fffbeb; }
+.c-b { border-color: #16a34a; background: #f0fdf4; }
+.c-c { border-color: #9333ea; background: #faf5ff; }
+table { border-collapse: collapse; width: 100%; margin: 0.5rem 0; }
+th, td { border: 1px solid #64748b; padding: 0.5rem; text-align: center; }
+th { background: #f1f5f9; }
+.line { border-bottom: 1px solid #0f172a; display: inline-block; min-width: 180px; }
+ul { margin-left: 1.2rem; }
+@media print {
+  .no-print-bar { display: none; }
+  body { padding: 0; }
+  .page { border: none; padding: 0; margin: 0; width: 100%; max-width: 100%; page-break-after: always; }
+}
+</style>
+</head>
+<body>
+
+<div class="no-print-bar">
+  <span>Documento listo para impresión. Haz clic aquí: </span>
+  <button onclick="window.print()">🖨️ Imprimir Fichas e Inventario</button>
+</div>
+
+<!-- HOJA 0: INVENTARIO DE MATERIALES -->
+<div class="page">
+  <h1>🧰 Lista de Materiales por Equipo (2–3 alumnos)</h1>
+  <div class="subtitle">Sesión: Alarma de Buzzer en Paralelo</div>
+  
+  <div class="card" style="border-color: #0284c7; background: #f0f9ff;">
+    <h2>📦 Componentes por Mesas de Trabajo</h2>
+    <ul>
+      <li><b>1 Protoboard</b> (400 u 830 puntos)[cite: 1].</li>
+      <li><b>1 Fuente de Alimentación:</b> 5V USB o Módulo de pilas (3x AA)[cite: 1].</li>
+      <li><b>2 Pulsadores</b> de 4 patas (Push-buttons)[cite: 1].</li>
+      <li><b>1 Buzzer Activo de 5V</b> (Importante: debe ser activo para sonar con corriente directa)[cite: 1].</li>
+      <li><b>Cables de Conexión (Jumpers):</b>
+        <ul>
+          <li>1 Cable Rojo (Línea positiva)[cite: 1]</li>
+          <li>1 Cable Negro (Línea negativa / GND)[cite: 1]</li>
+          <li>4 Cables Amarillos (o de otro color para los nodos de entrada/salida)[cite: 1]</li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>⚠️ Notas de Seguridad y Cuidado</h2>
+    <ul>
+      <li>No acercar el Buzzer directamente a los oídos[cite: 1].</li>
+      <li>Revisar la polaridad del Buzzer: Pata larga al nodo positivo/salida, pata corta a GND (-)[cite: 1].</li>
+      <li>Desconectar la batería antes de hacer modificaciones en los cables[cite: 1].</li>
+    </ul>
+  </div>
+</div>
+
+<!-- HOJA 1: FICHA 5-7 AÑOS -->
+<div class="page">
+  <h1>🤖 Ficha de Trabajo: Robótica</h1>
+  <div class="subtitle">La Casita Segura (5–7 años)</div>
+  
+  <div class="info-box">
+    <span><b>Nombre:</b> <span class="line"></span></span>
+    <span><b>Fecha:</b> ____________</span>
+  </div>
+
+  <div class="card c-a">
+    <h2>📖 Cuento: «Dos Puertas, Una Campana»</h2>
+    <p>Una casita tiene una puerta al frente y otra al patio, pero una sola campana. Si el cartero toca en el frente: ¡DING! Si el vecino toca en el patio: ¡DING! Con cualquiera de los dos botones la alarma suena[cite: 1].</p>
+  </div>
+
+  <div class="card c-a">
+    <h2>✏️ Registro de Pruebas</h2>
+    <p>Circula <b>SÍ</b> o <b>NO</b> según lo que escuchaste en tu protoboard[cite: 1]:</p>
+    <table>
+      <tr><th>PUERTA (Botón 1)</th><th>PATIO (Botón 2)</th><th>¿Suena el Buzzer?</th></tr>
+      <tr><td>Presionado 👇</td><td>Suelto ✋</td><td>🔊 SÍ / 🔇 NO[cite: 1]</td></tr>
+      <tr><td>Suelto ✋</td><td>Presionado 👇</td><td>🔊 SÍ / 🔇 NO[cite: 1]</td></tr>
+      <tr><td>Presionado 👇</td><td>Presionado 👇</td><td>🔊 SÍ / 🔇 NO[cite: 1]</td></tr>
+      <tr><td>Suelto ✋</td><td>Suelto ✋</td><td>🔊 SÍ / 🔇 NO[cite: 1]</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- HOJA 2: FICHA 7-9 AÑOS -->
+<div class="page">
+  <h1>🤖 Ficha de Trabajo: Robótica</h1>
+  <div class="subtitle">Alarma de la Casa y Detective de Fallas (7–9 años)</div>
+  
+  <div class="info-box">
+    <span><b>Nombre:</b> <span class="line"></span></span>
+    <span><b>Fecha:</b> ____________</span>
+  </div>
+
+  <div class="card c-b">
+    <h2>📊 Tabla de Pruebas Físicas</h2>
+    <p>Escribe <b>SUENA</b> o <b>SILENCIO</b> según las pruebas realizadas[cite: 1]:</p>
+    <table>
+      <tr><th>Botón A</th><th>Botón B</th><th>Predicción</th><th>Resultado Real</th></tr>
+      <tr><td>Suelto</td><td>Suelto</td><td></td><td>[cite: 1]</td></tr>
+      <tr><td>Presionado</td><td>Suelto</td><td></td><td>[cite: 1]</td></tr>
+      <tr><td>Suelto</td><td>Presionado</td><td></td><td>[cite: 1]</td></tr>
+      <tr><td>Presionado</td><td>Presionado</td><td></td><td>[cite: 1]</td></tr>
+    </table>
+  </div>
+
+  <div class="card c-b">
+    <h2>🕵️ Reporte de Detective de Fallas</h2>
+    <p>Falla que encontré en la otra mesa: <span class="line" style="width:100%"></span>[cite: 1]</p>
+    <p>Cómo la arreglé: <span class="line" style="width:100%"></span>[cite: 1]</p>
+    <p style="margin-top:0.8rem"><b>Pregunta de Independencia:</b> Si quito el Botón A por completo, ¿el Botón B sigue activando la alarma? ¿Por qué?</p>
+    <p><span class="line" style="width:100%"></span>[cite: 1]</p>
+  </div>
+</div>
+
+<!-- HOJA 3: FICHA 9-11 AÑOS -->
+<div class="page">
+  <h1>🤖 Ficha de Trabajo: Robótica</h1>
+  <div class="subtitle">Sistema de Seguridad de 3 Sensores - Lógica OR (9–11 años)</div>
+  
+  <div class="info-box">
+    <span><b>Nombre:</b> <span class="line"></span></span>
+    <span><b>Fecha:</b> ____________</span>
+  </div>
+
+  <div class="card c-c">
+    <h2>⚡ Tabla de Verdad de 3 Sensores ($2^3 = 8$ Combinaciones)</h2>
+    <p>Escribe $0$ (Silencio) o $1$ (Sonido) para evaluar el circuito[cite: 1]:</p>
+    <table>
+      <tr><th>A</th><th>B</th><th>C</th><th>OR en Paralelo ($A + B + C$)</th><th>AND en Serie ($A \cdot B \cdot C$)</th></tr>
+      <tr><td>0</td><td>0</td><td>0</td><td></td><td>[cite: 1]</td></tr>
+      <tr><td>0</td><td>0</td><td>1</td><td></td><td>[cite: 1]</td></tr>
+      <tr><td>0</td><td>1</td><td>0</td><td></td><td>[cite: 1]</td></tr>
+      <tr><td>0</td><td>1</td><td>1</td><td></td><td>[cite: 1]</td></tr>
+      <tr><td>1</td><td>0</td><td>0</td><td></td><td>[cite: 1]</td></tr>
+      <tr><td>1</td><td>0</td><td>1</td><td></td><td>[cite: 1]</td></tr>
+      <tr><td>1</td><td>1</td><td>0</td><td></td><td>[cite: 1]</td></tr>
+      <tr><td>1</td><td>1</td><td>1</td><td></td><td>[cite: 1]</td></tr>
+    </table>
+  </div>
+
+  <div class="card c-c">
+    <h2>⚙️ Análisis Eléctrico</h2>
+    <p>¿Por qué el Buzzer no suena más fuerte cuando presionas dos o tres botones al mismo tiempo?</p>
+    <p><span class="line" style="width:100%"></span>[cite: 1]</p>
+  </div>
+</div>
+
+</body>
+</html>
