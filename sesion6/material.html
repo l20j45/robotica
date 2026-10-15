@@ -1,0 +1,434 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>
+      Materiales y Fichas Imprimibles - Mi Primer Arduino y Buzzer Musical
+    </title>
+    <style>
+      @page {
+        size: letter portrait;
+        margin: 1.2cm;
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: "Segoe UI", Arial, sans-serif;
+      }
+      body {
+        background: #ffffff;
+        color: #0f172a;
+        line-height: 1.4;
+        padding: 1rem;
+      }
+      .page {
+        width: 100%;
+        max-width: 800px;
+        margin: 0 auto 2rem auto;
+        padding: 1.5rem;
+        border: 2px dashed #cbd5e1;
+        border-radius: 12px;
+        page-break-after: always;
+      }
+      .no-print-bar {
+        background: #0284c7;
+        color: #ffffff;
+        padding: 1rem;
+        text-align: center;
+        margin-bottom: 1.5rem;
+        border-radius: 8px;
+      }
+      .no-print-bar button {
+        font-size: 1rem;
+        font-weight: bold;
+        padding: 0.6rem 1.2rem;
+        background: #f59e0b;
+        border: none;
+        color: #ffffff;
+        border-radius: 8px;
+        cursor: pointer;
+      }
+      h1 {
+        font-size: 1.4rem;
+        color: #0284c7;
+        text-align: center;
+        text-transform: uppercase;
+        margin-bottom: 0.2rem;
+      }
+      h2 {
+        font-size: 1.1rem;
+        color: #334155;
+        margin: 0.8rem 0 0.4rem;
+        border-bottom: 2px solid #cbd5e1;
+        padding-bottom: 0.2rem;
+      }
+      .subtitle {
+        text-align: center;
+        font-weight: bold;
+        color: #475569;
+        margin-bottom: 1rem;
+      }
+      .info-box {
+        border: 1px solid #cbd5e1;
+        padding: 0.6rem 1rem;
+        border-radius: 8px;
+        margin-bottom: 1rem;
+        display: flex;
+        justify-content: space-between;
+      }
+      .card {
+        border-radius: 12px;
+        padding: 1rem;
+        margin-bottom: 1rem;
+        border: 2px solid #e2e8f0;
+      }
+      .c-a {
+        border-color: #f59e0b;
+        background: #fffbeb;
+      }
+      .c-b {
+        border-color: #16a34a;
+        background: #f0fdf4;
+      }
+      .c-c {
+        border-color: #9333ea;
+        background: #faf5ff;
+      }
+      table {
+        border-collapse: collapse;
+        width: 100%;
+        margin: 0.5rem 0;
+      }
+      th,
+      td {
+        border: 1px solid #64748b;
+        padding: 0.5rem;
+        text-align: center;
+      }
+      th {
+        background: #f1f5f9;
+      }
+      .line {
+        border-bottom: 1px solid #0f172a;
+        display: inline-block;
+        min-width: 180px;
+      }
+      pre {
+        background: #1e293b;
+        color: #f8fafc;
+        padding: 0.8rem;
+        border-radius: 6px;
+        font-family: monospace;
+        font-size: 0.85rem;
+      }
+      ul {
+        margin-left: 1.2rem;
+      }
+      @media print {
+        .no-print-bar {
+          display: none;
+        }
+        body {
+          padding: 0;
+        }
+        .page {
+          border: none;
+          padding: 0;
+          margin: 0;
+          width: 100%;
+          max-width: 100%;
+          page-break-after: always;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="no-print-bar">
+      <span>Documento listo para impresión. Haz clic aquí: </span>
+      <button onclick="window.print()">🖨️ Imprimir Fichas e Inventario</button>
+    </div>
+
+    <!-- HOJA 0: INVENTARIO DE MATERIALES -->
+    <div class="page">
+      <h1>🧰 Lista de Materiales por Equipo (2–3 alumnos)</h1>
+      <div class="subtitle">Sesión: Mi Primer Arduino y Buzzer Musical</div>
+
+      <div class="card" style="border-color: #0284c7; background: #f0f9ff">
+        <h2>📦 Componentes por Mesas de Trabajo</h2>
+        <ul>
+          <li>
+            <b>1 Placa Arduino UNO</b> con su cable USB de datos[cite: 4].
+          </li>
+          <li><b>1 Protoboard</b> (400 puntos)[cite: 4].</li>
+          <li><b>2 Pulsadores de 4 patas</b> (Push-buttons)[cite: 4].</li>
+          <li>
+            <b>1 Buzzer Pasivo</b> (Requerido para generar tonos de diferentes
+            frecuencias)[cite: 4].
+          </li>
+          <li>
+            <b>7 Cables Jumper (Macho-Macho):</b>
+            <ul>
+              <li>4 Cables Negros (Conexiones a GND)[cite: 4]</li>
+              <li>1 Cable Azul (Pin 8 - Botón Canción)[cite: 4]</li>
+              <li>1 Cable Verde (Pin 9 - Botón Nota)[cite: 4]</li>
+              <li>1 Cable Amarillo (Pin 3 - Buzzer)[cite: 4]</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h2>⚠️ Recomendaciones de Manejo</h2>
+        <ul>
+          <li>
+            Armar el circuito siempre con el cable USB desconectado de la
+            computadora[cite: 4].
+          </li>
+          <li>
+            Evitar colocar la placa Arduino sobre superficies metálicas o
+            conductoras[cite: 4].
+          </li>
+          <li>
+            No acercar el buzzer directamente al oído durante las pruebas[cite:
+            4].
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- HOJA 1: FICHA 5-7 AÑOS -->
+    <div class="page">
+      <h1>🤖 Ficha de Trabajo: Robótica</h1>
+      <div class="subtitle">El Robot Artie Músico (5–7 años)</div>
+
+      <div class="info-box">
+        <span><b>Nombre:</b> <span class="line"></span></span>
+        <span><b>Fecha:</b> ____________</span>
+      </div>
+
+      <div class="card c-a">
+        <h2>🎨 1. Asignación de Pines y Cables</h2>
+        <p>
+          Colorea el cuadro según el color correspondiente para cada cable[cite:
+          4]:
+        </p>
+        <table>
+          <tr>
+            <th>Pin en Arduino</th>
+            <th>Componente</th>
+            <th>Color de Cable</th>
+          </tr>
+          <tr>
+            <td>Pin 3</td>
+            <td>Buzzer 🔊</td>
+            <td>Amarillo[cite: 4]</td>
+          </tr>
+          <tr>
+            <td>Pin 8</td>
+            <td>Botón 1 (Canción)</td>
+            <td>Azul[cite: 4]</td>
+          </tr>
+          <tr>
+            <td>Pin 9</td>
+            <td>Botón 2 (Una nota)</td>
+            <td>Verde[cite: 4]</td>
+          </tr>
+          <tr>
+            <td>GND</td>
+            <td>Línea de Regreso (-)</td>
+            <td>Negro[cite: 4]</td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="card c-a">
+        <h2>🎶 2. Identificación de la Canción</h2>
+        <p>
+          Marca con una palomita la melodía que tocó el robot Artie al presionar
+          el Botón 1[cite: 4]:
+        </p>
+        <p>
+          [ &nbsp; ] Martinillo &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [ &nbsp; ]
+          Estrellita &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [ &nbsp; ] La
+          Cucaracha[cite: 4]
+        </p>
+      </div>
+    </div>
+
+    <!-- HOJA 2: FICHA 7-9 AÑOS -->
+    <div class="page">
+      <h1>🤖 Ficha de Trabajo: Robótica</h1>
+      <div class="subtitle">La Caja Musical Programada (7–9 años)</div>
+
+      <div class="info-box">
+        <span><b>Nombre:</b> <span class="line"></span></span>
+        <span><b>Fecha:</b> ____________</span>
+      </div>
+
+      <div class="card c-b">
+        <h2>🎵 1. Escala de Notas y Frecuencias (Hz)</h2>
+        <table>
+          <tr>
+            <th>Nota</th>
+            <th>Frecuencia (Hz)</th>
+            <th>Tipo de Sonido</th>
+          </tr>
+          <tr>
+            <td>DO</td>
+            <td>262 Hz</td>
+            <td>Grave[cite: 3, 4]</td>
+          </tr>
+          <tr>
+            <td>RE</td>
+            <td>294 Hz</td>
+            <td>Grave-Medio[cite: 3, 4]</td>
+          </tr>
+          <tr>
+            <td>MI</td>
+            <td>330 Hz</td>
+            <td>Medio[cite: 3, 4]</td>
+          </tr>
+          <tr>
+            <td>FA</td>
+            <td>349 Hz</td>
+            <td>Medio[cite: 3, 4]</td>
+          </tr>
+          <tr>
+            <td>SOL</td>
+            <td>392 Hz</td>
+            <td>Medio-Agudo[cite: 3, 4]</td>
+          </tr>
+          <tr>
+            <td>LA</td>
+            <td>440 Hz</td>
+            <td>Afinación / Agudo[cite: 3, 4]</td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="card c-b">
+        <h2>🔬 2. Laboratorio de Frecuencias</h2>
+        <p>
+          Anota la sensación del sonido al probar diferentes frecuencias en el
+          programa[cite: 4]:
+        </p>
+        <table>
+          <tr>
+            <th>Valor de Hertz (Hz)</th>
+            <th>¿Es Grave o Agudo?</th>
+          </tr>
+          <tr>
+            <td>200 Hz</td>
+            <td>[cite: 4]</td>
+          </tr>
+          <tr>
+            <td>440 Hz</td>
+            <td>[cite: 4]</td>
+          </tr>
+          <tr>
+            <td>880 Hz</td>
+            <td>[cite: 4]</td>
+          </tr>
+          <tr>
+            <td>2000 Hz</td>
+            <td>[cite: 4]</td>
+          </tr>
+        </table>
+        <p style="margin-top: 0.6rem">
+          <b>Pregunta:</b> ¿Qué ocurre con el sonido a medida que el número de
+          Hertz aumenta?[cite: 4]
+        </p>
+        <p><span class="line" style="width: 100%"></span>[cite: 4]</p>
+      </div>
+    </div>
+
+    <!-- HOJA 3: FICHA 9-11 AÑOS -->
+    <div class="page">
+      <h1>🤖 Ficha de Trabajo: Robótica</h1>
+      <div class="subtitle">Análisis de Código y Lógica PULLUP (9–11 años)</div>
+
+      <div class="info-box">
+        <span><b>Nombre:</b> <span class="line"></span></span>
+        <span><b>Fecha:</b> ____________</span>
+      </div>
+
+      <div class="card c-c">
+        <h2>💻 1. Preguntas de Análisis</h2>
+        <pre>
+pinMode(BTN_CANCION, INPUT_PULLUP);
+if (digitalRead(BTN_CANCION) == LOW) {
+    tocarCancion();
+}
+    </pre
+        >
+        <p>
+          <b
+            >A) ¿Por qué no se incluyeron resistencias físicas externas en los
+            botones?</b
+          >[cite: 3, 4]
+        </p>
+        <p><span class="line" style="width: 100%"></span>[cite: 4]</p>
+        <p>
+          <b
+            >B) ¿Por qué la condición activa se lee con `LOW` en lugar de
+            `HIGH`?</b
+          >[cite: 3, 4]
+        </p>
+        <p><span class="line" style="width: 100%"></span>[cite: 4]</p>
+      </div>
+
+      <div class="card c-c">
+        <h2>🎼 2. Composición de Melodía propia</h2>
+        <p>
+          Escribe una secuencia de 6 notas usando las frecuencias en Hz vistas
+          en clase[cite: 4]:
+        </p>
+        <table>
+          <tr>
+            <th>Paso (#)</th>
+            <th>Nota Musical</th>
+            <th>Frecuencia (Hz)</th>
+            <th>Duración (ms)</th>
+          </tr>
+          <tr>
+            <td>1</td>
+            <td></td>
+            <td></td>
+            <td>[cite: 4]</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td></td>
+            <td></td>
+            <td>[cite: 4]</td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td></td>
+            <td></td>
+            <td>[cite: 4]</td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td></td>
+            <td></td>
+            <td>[cite: 4]</td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td></td>
+            <td></td>
+            <td>[cite: 4]</td>
+          </tr>
+          <tr>
+            <td>6</td>
+            <td></td>
+            <td></td>
+            <td>[cite: 4]</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>

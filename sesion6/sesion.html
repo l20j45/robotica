@@ -1,0 +1,428 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <title>Clase: Mi Primer Arduino y Buzzer Musical</title>
+    <style>
+      :root {
+        --bg: #fff8e7;
+        --card: #fff;
+        --ink: #1e293b;
+        --sub: #475569;
+        --line: #e2e8f0;
+        box-sizing: border-box;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root:not([data-theme="light"]) {
+          --bg: #0f172a;
+          --card: #1e293b;
+          --ink: #f8fafc;
+          --sub: #94a3b8;
+          --line: #334155;
+        }
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        background: var(--bg);
+        color: var(--ink);
+        font-family:
+          "Comic Sans MS", "Chalkboard SE", "Segoe UI", system-ui, sans-serif;
+        line-height: 1.5;
+        padding: 1rem;
+      }
+      main {
+        max-width: 900px;
+        margin: auto;
+      }
+      h1 {
+        font-size: 1.7rem;
+        text-align: center;
+        margin: 0.4rem 0 0.8rem;
+      }
+      h2 {
+        font-size: 1.35rem;
+        margin-bottom: 0.5rem;
+      }
+      h3 {
+        font-size: 1.05rem;
+        margin: 0.9rem 0 0.3rem;
+        color: var(--c);
+      }
+      p,
+      li {
+        margin-bottom: 0.4rem;
+      }
+      ul,
+      ol {
+        margin-left: 1.3rem;
+      }
+      nav {
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-bottom: 1rem;
+      }
+      nav button {
+        font: inherit;
+        font-weight: bold;
+        padding: 0.6rem 1rem;
+        border-radius: 14px;
+        border: 2px solid var(--line);
+        background: var(--card);
+        color: var(--ink);
+        cursor: pointer;
+      }
+      nav button.on {
+        background: var(--c);
+        color: #fff;
+        border-color: var(--c);
+      }
+      section {
+        display: none;
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-top: 6px solid var(--c);
+        border-radius: 20px;
+        padding: 1.3rem;
+      }
+      section.on {
+        display: block;
+      }
+      .box {
+        border: 2px dashed var(--c);
+        border-radius: 14px;
+        padding: 0.8rem 1rem;
+        margin: 0.8rem 0;
+      }
+      .wrap {
+        overflow-x: auto;
+      }
+      table {
+        border-collapse: collapse;
+        width: 100%;
+        min-width: 320px;
+      }
+      th,
+      td {
+        border: 2px solid var(--c);
+        padding: 0.5rem;
+        text-align: center;
+      }
+      th {
+        background: color-mix(in srgb, var(--c) 20%, transparent);
+      }
+      .tl td:first-child {
+        white-space: nowrap;
+        font-weight: bold;
+      }
+      .tl td:nth-child(3),
+      .l td {
+        text-align: left;
+      }
+      pre {
+        background: color-mix(in srgb, var(--c) 12%, transparent);
+        border-radius: 10px;
+        padding: 0.8rem;
+        overflow-x: auto;
+        font-size: 0.92rem;
+        margin: 0.5rem 0;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>🤖 Guía Didáctica: Mi Primer Arduino y Buzzer Musical</h1>
+      <nav>
+        <button class="on" style="--c: #0284c7" onclick="showTab('plan', this)">
+          📋 Explicación y Armado
+        </button>
+        <button style="--c: #f59e0b" onclick="showTab('a', this)">
+          ⭐ 5–7 años
+        </button>
+        <button style="--c: #16a34a" onclick="showTab('b', this)">
+          🚀 7–9 años
+        </button>
+        <button style="--c: #9333ea" onclick="showTab('c', this)">
+          ⚙️ 9–11 años
+        </button>
+      </nav>
+
+      <!-- VISIÓN GENERAL -->
+      <section id="plan" class="on" style="--c: #0284c7">
+        <h2>📋 Visión General de la Clase (1 h 30 min)</h2>
+        <p>
+          Primer contacto con Arduino[cite: 4]. El <b>Botón 1</b> toca
+          «Estrellita» y el <b>Botón 2</b> suena una sola nota[cite: 3, 4]. Los
+          niños arman el circuito; el docente carga o supervisa el código
+          (<b>practica_buzzer_2_botones.ino</b>)[cite: 3, 4].
+        </p>
+
+        <h3>🗣️ Secuencia Explicativa</h3>
+        <ol>
+          <li>
+            <b>¿Qué es Arduino? (3 min):</b> Un pequeño cerebro con oídos
+            (entradas), boca (salida) y un programa o receta[cite: 4].
+          </li>
+          <li>
+            <b>Hardware y Software (2 min):</b> Hardware es lo que se toca;
+            software es el programa[cite: 4].
+          </li>
+          <li>
+            <b>Los Pines (3 min):</b> Pines <b>8</b> y <b>9</b> escuchan los
+            botones; pin <b>3</b> habla al buzzer; <b>GND</b> es la
+            tierra/negativo[cite: 3, 4].
+          </li>
+          <li>
+            <b>Buzzer Pasivo y Frecuencia (4 min):</b> Necesita que el Arduino
+            marque el ritmo en Hertz (Hz)[cite: 4]. DO = 262 Hz; LA = 440
+            Hz[cite: 3, 4].
+          </li>
+          <li>
+            <b>Botones con INPUT_PULLUP (4 min):</b> Usan resistencias internas
+            del chip (HIGH suelto, LOW presionado). No requiere resistencias
+            externas[cite: 3, 4].
+          </li>
+          <li>
+            <b>Toma de Decisiones (2 min):</b> El programa evalúa en bucle qué
+            botón está presionado[cite: 3, 4].
+          </li>
+        </ol>
+        <pre>
+ Botón 1 ──► pin 8 ┐
+                   ├─► ARDUINO decide ──► pin 3 ──► Buzzer
+ Botón 2 ──► pin 9 ┘      (programa)</pre
+        >
+
+        <h3>🛠️ Armado Técnico Paso a Paso (USB Desconectado)</h3>
+        <ol>
+          <li>
+            Colocar cada pulsador cruzando la zanja central en columnas
+            distintas[cite: 4].
+          </li>
+          <li>
+            Cable <b>negro</b>: del pin <b>GND</b> del Arduino al riel (-) de la
+            protoboard[cite: 4].
+          </li>
+          <li>
+            <b>Botón 1:</b> Cable <b>azul</b> del pin <b>8</b> a una pata del
+            botón; cable negro de la pata opuesta al riel (-)[cite: 4].
+          </li>
+          <li>
+            <b>Botón 2:</b> Cable <b>verde</b> del pin <b>9</b> a una pata del
+            botón; cable negro de la pata opuesta al riel (-)[cite: 4].
+          </li>
+          <li>
+            <b>Buzzer:</b> Cable <b>amarillo</b> del pin <b>3</b> a la pata de
+            señal; pata (-) al riel (-) con cable negro[cite: 4].
+          </li>
+          <li>Revisar montaje y conectar el cable USB[cite: 4].</li>
+        </ol>
+
+        <h3>🕵️ Diagnóstico de Fallas Frecuentes</h3>
+        <div class="wrap">
+          <table class="l">
+            <tr>
+              <th>Síntoma</th>
+              <th>Causa Probable</th>
+              <th>Solución</th>
+            </tr>
+            <tr>
+              <td>No suena nada</td>
+              <td>Sin conexión en Pin 3 o GND</td>
+              <td>Revisar pin 3, GND y riel (-)[cite: 4]</td>
+            </tr>
+            <tr>
+              <td>Suena sin parar</td>
+              <td>Botón no cruza la zanja</td>
+              <td>Alinearlo cruzando la zanja central[cite: 4]</td>
+            </tr>
+            <tr>
+              <td>Todas las notas iguales</td>
+              <td>Buzzer activo en vez de pasivo</td>
+              <td>Reemplazar por buzzer pasivo[cite: 4]</td>
+            </tr>
+            <tr>
+              <td>Puerto no aparece</td>
+              <td>Cable USB solo de carga</td>
+              <td>Usar un cable USB de datos[cite: 4]</td>
+            </tr>
+          </table>
+        </div>
+      </section>
+
+      <!-- GRUPO 5-7 AÑOS -->
+      <section id="a" style="--c: #f59e0b">
+        <h2>⭐ 5–7 años: El Robot Artie Músico</h2>
+        <div class="wrap">
+          <table class="tl">
+            <tr>
+              <th>Min</th>
+              <th>Etapa</th>
+              <th>Acción Docente</th>
+            </tr>
+            <tr>
+              <td>0–10</td>
+              <td>🤖 Artie Humano</td>
+              <td>Juego corporal de entrada, cerebro y salida[cite: 4].</td>
+            </tr>
+            <tr>
+              <td>10–20</td>
+              <td>📖 Cuento</td>
+              <td>Lectura «Artie y sus oídos»[cite: 4].</td>
+            </tr>
+            <tr>
+              <td>20–30</td>
+              <td>🎨 Identificación</td>
+              <td>
+                Pegar puntos de color en los pines (8 azul, 9 verde, 3 amarillo,
+                GND negro)[cite: 4].
+              </td>
+            </tr>
+            <tr>
+              <td>30–35</td>
+              <td>🤸 Pausa</td>
+              <td>Descanso breve[cite: 4].</td>
+            </tr>
+            <tr>
+              <td>35–65</td>
+              <td>🛠️ Armado</td>
+              <td>Ensamble del circuito por colores[cite: 4].</td>
+            </tr>
+            <tr>
+              <td>65–80</td>
+              <td>🕺 Estatua Musical</td>
+              <td>Juego de baile y pausa al soltar el botón[cite: 4].</td>
+            </tr>
+            <tr>
+              <td>80–90</td>
+              <td>🧹 Cierre</td>
+              <td>Revisión de ficha e inventario[cite: 4].</td>
+            </tr>
+          </table>
+        </div>
+      </section>
+
+      <!-- GRUPO 7-9 AÑOS -->
+      <section id="b" style="--c: #16a34a">
+        <h2>🚀 7–9 años: La Caja Musical Programada</h2>
+        <div class="wrap">
+          <table class="tl">
+            <tr>
+              <th>Min</th>
+              <th>Etapa</th>
+              <th>Acción Docente</th>
+            </tr>
+            <tr>
+              <td>0–10</td>
+              <td>📏 Regla Vibrante</td>
+              <td>
+                Experimento práctico con reglas para entender Hertz (Hz)[cite:
+                4].
+              </td>
+            </tr>
+            <tr>
+              <td>10–25</td>
+              <td>🧠 Teoría</td>
+              <td>
+                Explicación de hardware, software, pines y frecuencias[cite: 4].
+              </td>
+            </tr>
+            <tr>
+              <td>25–55</td>
+              <td>🛠️ Ensamble</td>
+              <td>Montaje del circuito e integración del programa[cite: 4].</td>
+            </tr>
+            <tr>
+              <td>55–60</td>
+              <td>🤸 Pausa</td>
+              <td>Hidratación[cite: 4].</td>
+            </tr>
+            <tr>
+              <td>60–75</td>
+              <td>🔬 Laboratorio</td>
+              <td>Pruebas de cambio de Hertz en el código[cite: 4].</td>
+            </tr>
+            <tr>
+              <td>75–90</td>
+              <td>🧹 Cierre</td>
+              <td>Llenado de ficha y orden[cite: 4].</td>
+            </tr>
+          </table>
+        </div>
+      </section>
+
+      <!-- GRUPO 9-11 AÑOS -->
+      <section id="c" style="--c: #9333ea">
+        <h2>⚙️ 9–11 años: Lógica de Código, Arreglos y PULLUP</h2>
+        <div class="wrap">
+          <table class="tl">
+            <tr>
+              <th>Min</th>
+              <th>Etapa</th>
+              <th>Acción Docente</th>
+            </tr>
+            <tr>
+              <td>0–10</td>
+              <td>🖥️ Simulación</td>
+              <td>
+                Lectura e interpretación de condicionales en pizarra[cite: 4].
+              </td>
+            </tr>
+            <tr>
+              <td>10–25</td>
+              <td>🧠 Análisis</td>
+              <td>
+                Explicación de `INPUT_PULLUP`, `tone()`, arreglos y bucles
+                `for`[cite: 3, 4].
+              </td>
+            </tr>
+            <tr>
+              <td>25–50</td>
+              <td>🛠️ Ensamble</td>
+              <td>Carga de código y validación[cite: 4].</td>
+            </tr>
+            <tr>
+              <td>50–55</td>
+              <td>🤸 Pausa</td>
+              <td>Descanso[cite: 4].</td>
+            </tr>
+            <tr>
+              <td>55–75</td>
+              <td>🏆 Retos</td>
+              <td>
+                Modificación de melodía y duraciones en el programa[cite: 3, 4].
+              </td>
+            </tr>
+            <tr>
+              <td>75–90</td>
+              <td>🧹 Cierre</td>
+              <td>Ficha técnica e inventario[cite: 4].</td>
+            </tr>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      function showTab(id, btn) {
+        document
+          .querySelectorAll("nav button")
+          .forEach((b) => b.classList.remove("on"));
+        document
+          .querySelectorAll("section")
+          .forEach((s) => s.classList.remove("on"));
+        btn.classList.add("on");
+        document.getElementById(id).classList.add("on");
+      }
+    </script>
+  </body>
+</html>
