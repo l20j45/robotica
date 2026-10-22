@@ -1,0 +1,831 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <title>Sesión 6: Motor DC, botón e inversión de giro</title>
+    <style>
+      :root {
+        --bg: #fff8e7;
+        --card: #fff;
+        --ink: #1e293b;
+        --sub: #475569;
+        --line: #e2e8f0;
+        box-sizing: border-box;
+        padding-top: env(safe-area-inset-top, 0px);
+        padding-bottom: env(safe-area-inset-bottom, 0px);
+      }
+      @media (prefers-color-scheme: dark) {
+        :root:not([data-theme="light"]) {
+          --bg: #0f172a;
+          --card: #1e293b;
+          --ink: #f8fafc;
+          --sub: #94a3b8;
+          --line: #334155;
+        }
+      }
+      :root[data-theme="dark"] {
+        --bg: #0f172a;
+        --card: #1e293b;
+        --ink: #f8fafc;
+        --sub: #94a3b8;
+        --line: #334155;
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html {
+        scroll-padding-top: env(safe-area-inset-top, 0px);
+      }
+      body {
+        background: var(--bg);
+        color: var(--ink);
+        font-family:
+          "Comic Sans MS", "Chalkboard SE", "Segoe UI", system-ui, sans-serif;
+        line-height: 1.5;
+        padding: 1rem;
+      }
+      main {
+        max-width: 900px;
+        margin: auto;
+      }
+      h1 {
+        font-size: 1.7rem;
+        text-align: center;
+        margin: 0.4rem 0 0.8rem;
+      }
+      h2 {
+        font-size: 1.35rem;
+        margin-bottom: 0.5rem;
+      }
+      h3 {
+        font-size: 1.05rem;
+        margin: 0.9rem 0 0.3rem;
+        color: var(--c);
+      }
+      p,
+      li {
+        margin-bottom: 0.4rem;
+      }
+      ul,
+      ol {
+        margin-left: 1.3rem;
+      }
+      nav {
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-bottom: 1rem;
+      }
+      nav button {
+        font: inherit;
+        font-weight: bold;
+        padding: 0.6rem 1rem;
+        border-radius: 14px;
+        border: 2px solid var(--line);
+        background: var(--card);
+        color: var(--ink);
+        cursor: pointer;
+      }
+      nav button.on {
+        background: var(--c);
+        color: #fff;
+        border-color: var(--c);
+      }
+      section {
+        display: none;
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-top: 6px solid var(--c);
+        border-radius: 20px;
+        padding: 1.3rem;
+      }
+      section.on {
+        display: block;
+      }
+      .box {
+        border: 2px dashed var(--c);
+        border-radius: 14px;
+        padding: 0.8rem 1rem;
+        margin: 0.8rem 0;
+      }
+      .warn {
+        border: 3px solid #dc2626;
+        border-radius: 14px;
+        padding: 0.8rem 1rem;
+        margin: 0.8rem 0;
+      }
+      .wrap {
+        overflow-x: auto;
+      }
+      table {
+        border-collapse: collapse;
+        width: 100%;
+        min-width: 320px;
+      }
+      th,
+      td {
+        border: 2px solid var(--c);
+        padding: 0.5rem;
+        text-align: center;
+      }
+      th {
+        background: color-mix(in srgb, var(--c) 20%, transparent);
+      }
+      .tl td:first-child {
+        white-space: nowrap;
+        font-weight: bold;
+      }
+      .tl td:nth-child(3),
+      .l td {
+        text-align: left;
+      }
+      pre {
+        background: color-mix(in srgb, var(--c) 12%, transparent);
+        border-radius: 10px;
+        padding: 0.8rem;
+        overflow-x: auto;
+        font-size: 0.9rem;
+        margin: 0.5rem 0;
+      }
+      .line {
+        border-bottom: 2px solid var(--sub);
+        display: inline-block;
+        min-width: 160px;
+      }
+      .draw {
+        height: 90px;
+        border: 2px dashed var(--c);
+        border-radius: 10px;
+      }
+      .pr {
+        text-align: center;
+        margin: 1rem 0;
+      }
+      .pr button {
+        font: inherit;
+        padding: 0.5rem 1.2rem;
+        border-radius: 12px;
+        border: 0;
+        background: #f59e0b;
+        font-weight: bold;
+        cursor: pointer;
+      }
+      @media print {
+        nav,
+        .pr,
+        .noprint {
+          display: none;
+        }
+        section {
+          display: block !important;
+          break-after: page;
+          border: 0;
+        }
+        .fp {
+          break-before: page;
+        }
+        body {
+          background: #fff;
+          color: #000;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>⚙️ Sesión 6: Motor DC, Botón e Inversión de Giro</h1>
+      <nav>
+        <button class="on" style="--c: #0284c7" data-t="plan">
+          📋 Explicación y prácticas
+        </button>
+        <button style="--c: #f59e0b" data-t="a">⭐ 5–7 años</button>
+        <button style="--c: #16a34a" data-t="b">🚀 7–9 años</button>
+        <button style="--c: #9333ea" data-t="c">⚙️ 9–11 años</button>
+      </nav>
+
+      <section id="plan" class="on" style="--c: #0284c7">
+        <h2>📋 Visión general (1 h 30 min por grupo, sin Arduino)</h2>
+        <p>
+          <b>Práctica 1:</b> conectar el motor a las pilas, ver girar la rueda e
+          invertir el sentido. <b>Práctica 2:</b> los niños intentan agregar un
+          botón y luego invertir el giro, con pistas por niveles. Solo el grupo
+          de 9–11 agrega un potenciómetro para controlar la velocidad.
+        </p>
+
+        <h3>🗣️ Explicación detallada (qué decir)</h3>
+        <ol>
+          <li>
+            <b>El motor (3 min):</b> adentro hay un imán y una bobina. Cuando
+            pasa corriente, la bobina se vuelve imán y empuja al eje. El eje
+            gira y mueve la rueda.
+          </li>
+          <li>
+            <b>El circuito cerrado (3 min):</b> la energía sale del (+) de las
+            pilas, pasa por el motor y regresa al (−). Si el camino se corta, el
+            motor se detiene.
+          </li>
+          <li>
+            <b>La polaridad (3 min):</b> la energía entra al motor por un cable
+            y sale por el otro. Si cambias qué cable recibe el (+), el motor
+            gira al <b>sentido contrario</b>.
+          </li>
+          <li>
+            <b>El botón (3 min):</b> es una puerta en el camino. Presionado, el
+            camino se cierra y pasa energía; suelto, se abre y se detiene. Va en
+            <b>serie</b> con el motor.
+          </li>
+          <li>
+            <b>El inversor (4 min):</b> en vez de voltear cables a mano, un
+            interruptor deslizable de 6 patas (DPDT) con los cables
+            <b>cruzados</b> intercambia cuál cable recibe el (+).
+          </li>
+          <li>
+            <b>Solo 9–11 — el potenciómetro (4 min):</b> es una resistencia que
+            se ajusta con una perilla. No se pone directo con el motor, porque
+            uno común de 10 kΩ casi no deja pasar corriente. Se usa para
+            controlar un <b>transistor</b>, que es el que maneja la corriente
+            del motor.
+          </li>
+        </ol>
+
+        <h3>🧰 Materiales por equipo (2–3 niños)</h3>
+        <ul>
+          <li>
+            Portapilas con 2 pilas AA (3 V); 4 pilas AA (6 V) para 7–11 años si
+            el motor es de 6 V
+          </li>
+          <li>
+            Motor DC de 3–6 V con rueda (o disco de cartulina) y una marca de
+            cinta de color
+          </li>
+          <li>Cables con pinzas caimán o jumpers, protoboard</li>
+          <li>
+            1 pulsador y, si hay, 1 interruptor deslizable de 6 patas (DPDT)
+          </li>
+          <li>
+            Solo 9–11: potenciómetro de 10 kΩ, transistor NPN 2N2222 / PN2222,
+            diodo 1N4007, resistencia de 1 kΩ
+          </li>
+        </ul>
+
+        <h3>🔋 Práctica 1: el motor y la rueda</h3>
+        <ol>
+          <li>Pega una marca de cinta a la rueda para ver hacia dónde gira.</li>
+          <li>
+            Conecta un cable del motor al (+) del portapilas y el otro al (−).
+            Observa el sentido (derecha o izquierda).
+          </li>
+          <li>
+            Desconecta, <b>voltea</b> los dos cables y conecta de nuevo. ¿Qué
+            cambió?
+          </li>
+          <li>
+            Anota: con cables normales, la rueda gira hacia ______; con cables
+            volteados, hacia ______.
+          </li>
+        </ol>
+
+        <h3>🧩 Práctica 2: botón e inversión (retos con pistas)</h3>
+        <p>
+          Dales el reto sin la solución y entrega una pista a la vez solo si se
+          atoran:
+        </p>
+        <div class="box">
+          <h3>Reto A: «Que gire solo cuando yo presione»</h3>
+          <ul>
+            <li>
+              <b>Pista 1:</b> el botón es una puerta: presionada deja pasar la
+              energía.
+            </li>
+            <li>
+              <b>Pista 2:</b> la energía necesita un camino cerrado: pila → ? →
+              motor → pila.
+            </li>
+            <li>
+              <b>Pista 3:</b> pon el botón en medio de ese camino, entre el (+)
+              y el motor.
+            </li>
+          </ul>
+        </div>
+        <div class="box">
+          <h3>Reto B: «Que gire al revés sin voltear cables a mano»</h3>
+          <ul>
+            <li>
+              <b>Pista 1:</b> ¿qué hiciste en la práctica 1 para invertir?
+            </li>
+            <li>
+              <b>Pista 2:</b> hay que cambiar qué cable del motor recibe el (+)
+              usando una palanca.
+            </li>
+            <li>
+              <b>Pista 3 (docente):</b> entregar el interruptor DPDT y mostrar
+              el esquema del cruce.
+            </li>
+          </ul>
+        </div>
+        <p><b>Solución del docente:</b></p>
+        <pre>
+Botón (Reto A):
+ (+) pilas ──► [botón] ──► motor cable 1
+ (−) pilas ──────────────► motor cable 2
+
+Inversor con DPDT (Reto B):  el botón queda entre el (+) y el interruptor
+           izq.   medio   der.
+ Fila 1:   (+)  ──  ●  ──  (−)     medio → motor cable 1
+ Fila 2:   (−)  ──  ●  ──  (+)     medio → motor cable 2
+ La palanca mueve los dos medios a la vez: izquierda o derecha.</pre
+        >
+        <p>
+          Si no hay DPDT, se invierte volteando los cables con pinzas caimán, y
+          el reto B se cambia por: «¿cuál es la forma más rápida de invertir con
+          pinzas?».
+        </p>
+
+        <h3>🕵️ Si algo falla</h3>
+        <div class="wrap">
+          <table class="l">
+            <tr>
+              <th>Síntoma</th>
+              <th>Causa probable</th>
+              <th>Solución</th>
+            </tr>
+            <tr>
+              <td>No gira</td>
+              <td>Pilas gastadas o cable suelto</td>
+              <td>Probar pilas y revisar las pinzas</td>
+            </tr>
+            <tr>
+              <td>Gira sin presionar el botón</td>
+              <td>El botón está en paralelo o mal orientado</td>
+              <td>Ponerlo en serie, cruzando la zanja de la protoboard</td>
+            </tr>
+            <tr>
+              <td>El inversor no cambia el giro</td>
+              <td>Cables no cruzados</td>
+              <td>Revisar el esquema: filas con (+) y (−) en lados opuestos</td>
+            </tr>
+            <tr>
+              <td>Gira lento</td>
+              <td>Pilas bajas o rueda rozando</td>
+              <td>Pilas nuevas; revisar la rueda</td>
+            </tr>
+          </table>
+        </div>
+        <h3>⚠️ Seguridad</h3>
+        <ul>
+          <li>
+            No frenar la rueda ni el eje con la mano: el motor se calienta y
+            gasta las pilas.
+          </li>
+          <li>No unir con un cable los dos extremos del portapilas.</li>
+          <li>
+            Rueda y hélice ligeras, lejos de la cara y el cabello. Sacar las
+            pilas al terminar.
+          </li>
+        </ul>
+        <div class="pr">
+          <button onclick="window.print()">🖨️ Imprimir guía y fichas</button>
+        </div>
+      </section>
+
+      <section id="a" style="--c: #f59e0b">
+        <h2>⭐ 5–7 años: La Rueda que Cambia de Rumbo</h2>
+        <div class="wrap">
+          <table class="tl">
+            <tr>
+              <th>Min</th>
+              <th>Actividad</th>
+              <th>Qué hacer</th>
+            </tr>
+            <tr>
+              <td>0–10</td>
+              <td>🚶 Rueda humana</td>
+              <td>Ver abajo.</td>
+            </tr>
+            <tr>
+              <td>10–25</td>
+              <td>🔋 Práctica 1a</td>
+              <td>
+                Conectar el motor a 2 pilas y ver girar la rueda con la marca de
+                color.
+              </td>
+            </tr>
+            <tr>
+              <td>25–35</td>
+              <td>🔄 Práctica 1b</td>
+              <td>Voltear los cables y observar el giro al revés.</td>
+            </tr>
+            <tr>
+              <td>35–40</td>
+              <td>🤸 Pausa</td>
+              <td>Estirarse y tomar agua.</td>
+            </tr>
+            <tr>
+              <td>40–60</td>
+              <td>🔘 Práctica 2a</td>
+              <td>Reto A: agregar el botón, con pistas una a una.</td>
+            </tr>
+            <tr>
+              <td>60–75</td>
+              <td>🎚️ La palanca mágica</td>
+              <td>Ver abajo.</td>
+            </tr>
+            <tr>
+              <td>75–85</td>
+              <td>✏️ Ficha</td>
+              <td>Flechas y marcas.</td>
+            </tr>
+            <tr>
+              <td>85–90</td>
+              <td>🧹 Limpieza</td>
+              <td>Sacar las pilas y guardar.</td>
+            </tr>
+          </table>
+        </div>
+        <div class="box">
+          <h3>🚶 Calentamiento: rueda humana (10 min)</h3>
+          <p>
+            <b>Para qué:</b> aprender «derecha» e «izquierda» (como las
+            manecillas del reloj o al revés). Sin material.
+          </p>
+          <ol>
+            <li>
+              Todos caminan en círculo en el sentido de las manecillas del
+              reloj. Cada niño es una «rueda».
+            </li>
+            <li>
+              El docente dice «¡cambio de pilas!» y todos giran al sentido
+              contrario.
+            </li>
+            <li>
+              Repite varias veces y pregunta: «¿Cómo cambió el giro?».
+              Conclusión: al voltear los cables de las pilas, la rueda cambia de
+              sentido.
+            </li>
+          </ol>
+        </div>
+        <div class="box">
+          <h3>🎚️ La palanca mágica (15 min)</h3>
+          <p>
+            El docente prepara antes el inversor (DPDT con cables cruzados y el
+            botón conectados). Los niños solo usan la palanca y el botón. En el
+            juego «Semáforo de la rueda» el docente dice «¡derecha!» o
+            «¡izquierda!»; el niño mueve la palanca, presiona el botón y la
+            rueda gira hacia ese lado. Rotan los niños.
+          </p>
+        </div>
+        <div class="box fp">
+          <h3>✏️ Ficha: Nombre <span class="line"></span></h3>
+          <p>Dibuja una flecha que muestre hacia dónde giró la rueda:</p>
+          <div class="wrap">
+            <table>
+              <tr>
+                <th>Cables normales</th>
+                <th>Cables volteados</th>
+              </tr>
+              <tr>
+                <td><div class="draw"></div></td>
+                <td><div class="draw"></div></td>
+              </tr>
+            </table>
+          </div>
+          <p style="margin-top: 0.6rem">
+            Cuando presiono el botón, el motor: &nbsp;[ &nbsp;] gira
+            &nbsp;&nbsp; [ &nbsp;] se queda quieto
+          </p>
+          <p>
+            Cuando suelto el botón, el motor: &nbsp;[ &nbsp;] gira &nbsp;&nbsp;
+            [ &nbsp;] se queda quieto
+          </p>
+          <p>
+            La palanca sirve para: &nbsp;[ &nbsp;] cambiar el giro &nbsp;&nbsp;
+            [ &nbsp;] hacer sonar el motor
+          </p>
+        </div>
+      </section>
+
+      <section id="b" style="--c: #16a34a">
+        <h2>🚀 7–9 años: Motor, Botón y Cambio de Giro</h2>
+        <div class="wrap">
+          <table class="tl">
+            <tr>
+              <th>Min</th>
+              <th>Actividad</th>
+              <th>Qué hacer</th>
+            </tr>
+            <tr>
+              <td>0–10</td>
+              <td>🔁 Motor humano</td>
+              <td>Ver abajo.</td>
+            </tr>
+            <tr>
+              <td>10–25</td>
+              <td>🔋 Práctica 1</td>
+              <td>Conectar, ver girar e invertir; anotar el sentido.</td>
+            </tr>
+            <tr>
+              <td>25–35</td>
+              <td>🔬 Laboratorio de voltaje</td>
+              <td>
+                Contar las vueltas de la marca en 10 s con 2 pilas y luego con 4
+                pilas (solo si el motor es de 6 V).
+              </td>
+            </tr>
+            <tr>
+              <td>35–40</td>
+              <td>🤸 Pausa</td>
+              <td>Tomar agua.</td>
+            </tr>
+            <tr>
+              <td>40–60</td>
+              <td>🔘 Práctica 2a</td>
+              <td>
+                Reto A: agregar el botón; entregar pistas solo si se atoran.
+              </td>
+            </tr>
+            <tr>
+              <td>60–80</td>
+              <td>🔄 Práctica 2b</td>
+              <td>
+                Reto B: invertir con el interruptor DPDT, con pistas por
+                niveles.
+              </td>
+            </tr>
+            <tr>
+              <td>80–85</td>
+              <td>✏️ Ficha</td>
+              <td>Registro y dibujo del circuito.</td>
+            </tr>
+            <tr>
+              <td>85–90</td>
+              <td>🧹 Limpieza</td>
+              <td>Sacar las pilas y guardar.</td>
+            </tr>
+          </table>
+        </div>
+        <div class="box">
+          <h3>🔁 Calentamiento: motor humano (10 min)</h3>
+          <p>
+            <b>Para qué:</b> entender que la dirección de la energía decide el
+            sentido del giro. Material: una pelota pequeña.
+          </p>
+          <ol>
+            <li>
+              Forma un círculo de 6 niños. Un niño en el centro es el
+              <b>motor</b>; el círculo es el circuito. Uno del círculo es la
+              <b>pila</b>.
+            </li>
+            <li>
+              La pila pasa la pelota hacia la derecha. El motor gira en ese
+              sentido mientras la pelota pase por él.
+            </li>
+            <li>
+              La pila invierte el sentido de la pelota: el motor gira al revés.
+            </li>
+            <li>
+              Un niño se «suelta» y la pelota se detiene: el motor se para. Eso
+              es abrir el circuito.
+            </li>
+          </ol>
+        </div>
+        <div class="box fp">
+          <h3>✏️ Ficha: Nombre <span class="line"></span></h3>
+          <div class="wrap">
+            <table>
+              <tr>
+                <th>Prueba</th>
+                <th>¿Gira?</th>
+                <th>¿Hacia dónde?</th>
+              </tr>
+              <tr>
+                <td>Cables normales</td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Cables volteados</td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Con botón presionado</td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Con botón suelto</td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Con la palanca a la derecha</td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Con la palanca a la izquierda</td>
+                <td></td>
+                <td></td>
+              </tr>
+            </table>
+          </div>
+          <p style="margin-top: 0.6rem">
+            <b>Laboratorio:</b> vueltas en 10 s con 2 pilas: ______ &nbsp; con 4
+            pilas: ______
+          </p>
+          <p>
+            ¿Qué pasa con la velocidad al poner más pilas?
+            <span class="line" style="width: 100%"></span>
+          </p>
+          <p>Dibuja tu circuito con el botón: pila, botón y motor.</p>
+          <div class="draw" style="height: 110px"></div>
+        </div>
+      </section>
+
+      <section id="c" style="--c: #9333ea">
+        <h2>⚙️ 9–11 años: Inversor, Botón y Control de Velocidad</h2>
+        <div class="wrap">
+          <table class="tl">
+            <tr>
+              <th>Min</th>
+              <th>Actividad</th>
+              <th>Qué hacer</th>
+            </tr>
+            <tr>
+              <td>0–10</td>
+              <td>🔢 Pistas numéricas</td>
+              <td>Ver abajo.</td>
+            </tr>
+            <tr>
+              <td>10–20</td>
+              <td>🔋 Práctica 1</td>
+              <td>
+                Motor directo, invertir giro y medir el voltaje de las pilas con
+                y sin carga.
+              </td>
+            </tr>
+            <tr>
+              <td>20–30</td>
+              <td>🧠 Explicación</td>
+              <td>
+                Botón en serie, inversor DPDT y potenciómetro con transistor.
+              </td>
+            </tr>
+            <tr>
+              <td>30–50</td>
+              <td>🔘 Práctica 2</td>
+              <td>
+                Reto A y B: botón e inversor DPDT, sin pistas hasta que las
+                pidan.
+              </td>
+            </tr>
+            <tr>
+              <td>50–55</td>
+              <td>🤸 Pausa</td>
+              <td>Tomar agua.</td>
+            </tr>
+            <tr>
+              <td>55–75</td>
+              <td>🎛️ Reto del potenciómetro</td>
+              <td>Ver abajo.</td>
+            </tr>
+            <tr>
+              <td>75–85</td>
+              <td>📝 Reporte</td>
+              <td>Ficha técnica.</td>
+            </tr>
+            <tr>
+              <td>85–90</td>
+              <td>🧹 Orden</td>
+              <td>Sacar las pilas y guardar.</td>
+            </tr>
+          </table>
+        </div>
+        <div class="box">
+          <h3>🔢 Calentamiento: pistas numéricas (10 min)</h3>
+          <ol>
+            <li>
+              Un motor pide 200 mA a 3 V. ¿Qué potencia consume? P = V × I = 3 ×
+              0,2 = 0,6 W.
+            </li>
+            <li>
+              Si pones una resistencia de 10 kΩ en serie con el motor, la
+              corriente máxima sería 3 V ÷ 10 000 Ω = 0,3 mA. ¿Alcanza para
+              mover el motor? (No: 0,3 mA es mil veces menos de lo que pide)
+            </li>
+            <li>
+              Conclusión: un potenciómetro común no puede controlar el motor
+              directo; necesitamos un transistor.
+            </li>
+          </ol>
+        </div>
+        <div class="box">
+          <h3>🎛️ Reto del potenciómetro (20 min)</h3>
+          <p>
+            Armen este circuito con el USB desconectado. Se usan 4 pilas (6 V)
+            o, con 2 pilas, una resistencia de 470 Ω en lugar de 1 kΩ:
+          </p>
+          <pre>
+(+) pilas ──► motor ──► Colector (C) del transistor
+(+) pilas ──► extremo 1 del potenciómetro
+(−) pilas ──► extremo 3 del potenciómetro
+cursor (pata del medio) ──[1 kΩ]──► Base (B)
+Emisor (E) ──► (−) pilas
+Diodo 1N4007 en paralelo con el motor (raya hacia el +)</pre
+          >
+          <ol>
+            <li>
+              Con la perilla en el extremo (−), el motor debe estar quieto.
+              Gírala poco a poco: la velocidad sube.
+            </li>
+            <li>
+              Cuenta las vueltas de la marca en 10 s con la perilla en 25, 50,
+              75 y 100 %.
+            </li>
+            <li>
+              Pregunta final: ¿por qué el motor no arranca con la perilla casi
+              en cero? (el transistor necesita más de unos 0,7 V en la base para
+              empezar a conducir)
+            </li>
+          </ol>
+          <p>
+            <b>Ojo:</b> confirma el orden de patas E-B-C de tu transistor en la
+            hoja de datos; varía según el modelo.
+          </p>
+        </div>
+        <div class="box fp">
+          <h3>✏️ Ficha: Nombre <span class="line"></span></h3>
+          <p>
+            Voltaje de las pilas sin motor: ______ V &nbsp; con el motor
+            girando: ______ V
+          </p>
+          <div class="wrap">
+            <table>
+              <tr>
+                <th>Perilla</th>
+                <th>Vueltas en 10 s</th>
+              </tr>
+              <tr>
+                <td>25 %</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>50 %</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>75 %</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>100 %</td>
+                <td></td>
+              </tr>
+            </table>
+          </div>
+          <p style="margin-top: 0.6rem">
+            <b>A)</b> ¿Por qué el potenciómetro no se pone directo en serie con
+            el motor? <span class="line" style="width: 100%"></span>
+          </p>
+          <p>
+            <b>B)</b> ¿Qué hace el transistor en este circuito?
+            <span class="line" style="width: 100%"></span>
+          </p>
+          <p>
+            <b>C)</b> ¿Cómo logra el interruptor DPDT invertir el giro?
+            <span class="line" style="width: 100%"></span>
+          </p>
+          <p>
+            <b>D)</b> ¿Para qué sirve el diodo en paralelo con el motor?
+            <span class="line" style="width: 100%"></span>
+          </p>
+          <p>Dibuja el inversor DPDT con el motor en el centro:</p>
+          <div class="draw" style="height: 110px"></div>
+        </div>
+      </section>
+    </main>
+    <script>
+      var btns = document.querySelectorAll("nav button"),
+        secs = document.querySelectorAll("section");
+      btns.forEach(function (b) {
+        b.onclick = function () {
+          btns.forEach(function (x) {
+            x.classList.remove("on");
+          });
+          secs.forEach(function (s) {
+            s.classList.remove("on");
+          });
+          b.classList.add("on");
+          document.getElementById(b.dataset.t).classList.add("on");
+        };
+      });
+    </script>
+  </body>
+</html>
