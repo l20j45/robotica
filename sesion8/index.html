@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sesión 8: El Eco del Murciélago (HC-SR04)</title>
+<style>
+:root{--bg:#fff8e7;--card:#fff;--ink:#1e293b;--sub:#475569;--line:#e2e8f0;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f172a;--card:#1e293b;--ink:#f8fafc;--sub:#94a3b8;--line:#334155}}
+:root[data-theme="dark"]{--bg:#0f172a;--card:#1e293b;--ink:#f8fafc;--sub:#94a3b8;--line:#334155}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{background:var(--bg);color:var(--ink);font-family:'Comic Sans MS','Chalkboard SE','Segoe UI',system-ui,sans-serif;line-height:1.5;padding:1rem}
+main{max-width:900px;margin:auto}
+h1{font-size:1.7rem;text-align:center;margin:.4rem 0 .8rem}
+h2{font-size:1.35rem;margin-bottom:.5rem}
+h3{font-size:1.05rem;margin:.9rem 0 .3rem;color:var(--c)}
+p,li{margin-bottom:.4rem}
+ul,ol{margin-left:1.3rem}
+nav{display:flex;gap:.5rem;flex-wrap:wrap;justify-content:center;margin-bottom:1rem}
+nav button{font:inherit;font-weight:bold;padding:.6rem 1rem;border-radius:14px;border:2px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer}
+nav button.on{background:var(--c);color:#fff;border-color:var(--c)}
+section{display:none;background:var(--card);border:1px solid var(--line);border-top:6px solid var(--c);border-radius:20px;padding:1.3rem}
+section.on{display:block}
+.box{border:2px dashed var(--c);border-radius:14px;padding:.8rem 1rem;margin:.8rem 0}
+.wrap{overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:320px}
+th,td{border:2px solid var(--c);padding:.5rem;text-align:center}
+th{background:color-mix(in srgb,var(--c) 20%,transparent)}
+.tl td:first-child{white-space:nowrap;font-weight:bold}
+.tl td:nth-child(3),.l td{text-align:left}
+pre{background:color-mix(in srgb,var(--c) 12%,transparent);border-radius:10px;padding:.8rem;overflow-x:auto;font-size:.9rem;margin:.5rem 0}
+.line{border-bottom:2px solid var(--sub);display:inline-block;min-width:160px}
+.sw{display:inline-block;width:22px;height:22px;border-radius:5px;border:2px solid #000;vertical-align:middle}
+.draw{height:100px;border:2px dashed var(--c);border-radius:10px}
+.pr{text-align:center;margin:1rem 0}
+.pr button{font:inherit;padding:.5rem 1.2rem;border-radius:12px;border:0;background:#f59e0b;font-weight:bold;cursor:pointer}
+@media print{nav,.pr,.noprint{display:none}section{display:block!important;break-after:page;border:0}.fp{break-before:page}body{background:#fff;color:#000}}
+</style>
+</head>
+<body>
+<main>
+<h1>🦇 Sesión 8: El Eco del Murciélago (HC-SR04)</h1>
+<nav>
+<button class="on" style="--c:#0284c7" data-t="plan">📋 Explicación y armado</button>
+<button style="--c:#f59e0b" data-t="a">⭐ 5–7 años</button>
+<button style="--c:#16a34a" data-t="b">🚀 7–9 años</button>
+<button style="--c:#9333ea" data-t="c">⚙️ 9–11 años</button>
+</nav>
+
+<section id="plan" class="on" style="--c:#0284c7">
+<h2>📋 Visión general (1 h 30 min por grupo)</h2>
+<p>El sensor ultrasónico mide distancias como un murciélago. Lo combinamos con el buzzer para hacer una <b>alarma de reversa</b>: cuanto más cerca está un objeto, más rápidos son los pitidos. El programa es <b>practica_sensor_ultrasonico.ino</b>.</p>
+
+<h3>🗣️ Explicación detallada (qué decir)</h3>
+<ol>
+<li><b>Ecolocalización (3 min):</b> los murciélagos y los delfines lanzan un sonido y escuchan el eco que rebota. Si el eco regresa rápido, el objeto está cerca; si tarda, está lejos. El sensor usa sonido <b>ultrasónico</b>, tan agudo que no lo oímos.</li>
+<li><b>Los dos «ojitos» (2 min):</b> los dos cilindros del sensor son diferentes: uno <b>emite</b> el sonido (T) y el otro lo <b>recibe</b> (R).</li>
+<li><b>Los 4 pines (4 min):</b> <b>VCC</b> y <b>GND</b> dan la energía. <b>Trig</b> es la orden: el Arduino dice «¡grita ahora!». <b>Echo</b> es la respuesta: el sensor devuelve un pulso cuya duración es el tiempo que tardó el sonido en ir y volver.</li>
+<li><b>De tiempo a distancia (4 min):</b> el sonido viaja a 340 m/s, que son 0,034 cm por microsegundo. Distancia = tiempo × 0,034 ÷ 2. Se divide entre 2 porque el sonido va <b>y vuelve</b>.</li>
+<li><b>Alarma de reversa (2 min):</b> el Arduino mide, decide y pita: lejos = silencio, medio = pitidos lentos, cerca = pitidos rápidos.</li>
+<li><b>Límites (2 min):</b> mide entre 2 cm y unos 4 m. Las telas y peluches absorben el sonido, y las superficies inclinadas lo desvían, por eso a veces no lee bien.</li>
+</ol>
+<pre> Arduino 5V ──► VCC (sensor)       Arduino pin 9 ──► Trig  (orden «grita»)
+ Arduino GND ─► GND (sensor)       Arduino pin 8 ◄── Echo  (tiempo del eco)
+ Arduino pin 3 ──► Buzzer (señal)  Buzzer (−) ──► GND</pre>
+
+<h3>🧰 Materiales por equipo (2–3 niños)</h3>
+<ul><li>Arduino Uno con USB, protoboard, sensor HC-SR04 y buzzer <b>pasivo</b></li><li>8 cables jumper: rojo (5V), negro (GND), amarillo (Trig), verde (Echo), azul (buzzer)</li><li>Regla de 30 cm; un libro o cartón como «pared»</li></ul>
+
+<h3>🛠️ Armado paso a paso (con el USB desconectado)</h3>
+<ol>
+<li>Inserta los 4 pines del sensor en la protoboard sin doblarlos, cada uno en su propia columna.</li>
+<li>Cable <b>rojo</b>: de 5V del Arduino al riel (+). Cable <b>negro</b>: de GND del Arduino al riel (−).</li>
+<li>Del riel (+) al pin <b>VCC</b> del sensor y del riel (−) al pin <b>GND</b> del sensor.</li>
+<li>Cable <b>amarillo</b>: del pin <b>Trig</b> al pin <b>9</b> del Arduino. Cable <b>verde</b>: del pin <b>Echo</b> al pin <b>8</b>.</li>
+<li>Buzzer: cable <b>azul</b> del pin 3 a la pata de señal; la otra pata al riel (−). Si el buzzer tiene 3 patas, <b>S</b> al pin 3 y <b>−</b> al riel (−).</li>
+<li>Revisión del docente y luego conecta el USB.</li></ol>
+<h3>⬆️ Cargar y probar</h3>
+<p>Arduino IDE → abrir el .ino → Placa Arduino Uno → Puerto → Subir. Abre el <b>Monitor Serie</b> (9600) para ver la distancia en cm. Pon la mano a 10 cm: deben sonar pitidos rápidos.</p>
+
+<h3>🕵️ Si algo falla</h3>
+<div class="wrap"><table class="l">
+<tr><th>Síntoma</th><th>Causa probable</th><th>Solución</th></tr>
+<tr><td>El Monitor Serie muestra -1</td><td>No regresa el eco: Trig y Echo cambiados o sin energía</td><td>Revisar pines 9 y 8 y que VCC vaya a 5V (no a 3,3V)</td></tr>
+<tr><td>Las lecturas saltan</td><td>Superficie blanda o inclinada</td><td>Usar libro o cartón recto frente al sensor</td></tr>
+<tr><td>El sensor lee bien pero no suena</td><td>Buzzer mal conectado o activo</td><td>Revisar pin 3 y GND; usar buzzer pasivo</td></tr>
+<tr><td>Siempre silencio</td><td>Objeto a más de 30 cm</td><td>Acercar la mano</td></tr>
+<tr><td>No aparece el Puerto</td><td>Cable USB solo de carga</td><td>Usar un cable de datos</td></tr>
+</table></div>
+<h3>⚠️ Seguridad</h3>
+<p>Armar siempre sin USB. No apretar los cilindros del sensor ni doblar sus pines. El buzzer no se acerca al oído.</p>
+<div class="pr"><button onclick="window.print()">🖨️ Imprimir guía y fichas</button></div>
+</section>
+
+<section id="a" style="--c:#f59e0b">
+<h2>⭐ 5–7 años: El Murciélago Robot</h2>
+<div class="wrap"><table class="tl"><tr><th>Min</th><th>Actividad</th><th>Qué hacer</th></tr>
+<tr><td>0–10</td><td>🦇 Murciélago humano</td><td>Ver abajo.</td></tr>
+<tr><td>10–20</td><td>📖 Cuento con títere</td><td>Un murciélago que no ve de noche lanza un «super-gritito» invisible y escucha cuánto tarda en volver.</td></tr>
+<tr><td>20–30</td><td>🔍 Conocer el sensor</td><td>Señalar los dos «ojitos» (el que grita y el que escucha) y pegar un punto de color junto a cada pin.</td></tr>
+<tr><td>30–35</td><td>🤸 Pausa</td><td>Estirarse y tomar agua.</td></tr>
+<tr><td>35–65</td><td>🧩 Armar el radar</td><td>Los niños arman con la tarjeta de colores; el docente revisa antes del USB.</td></tr>
+<tr><td>65–80</td><td>🔥 Caliente y frío</td><td>Ver abajo.</td></tr>
+<tr><td>80–85</td><td>✏️ Ficha</td><td>Colorear y dibujar.</td></tr>
+<tr><td>85–90</td><td>🧹 Limpieza</td><td>Guardar por colores.</td></tr></table></div>
+<div class="box"><h3>🦇 Calentamiento: murciélago humano (10 min)</h3>
+<p><b>Para qué:</b> entender que un eco rápido significa «cerca». Es un modelo: el sonido real es demasiado rápido para oírlo.</p>
+<ol><li>Un niño es el <b>murciélago</b> con los ojos cerrados. Otro es la <b>pared</b> y se coloca cerca o lejos sin decir dónde.</li>
+<li>El murciélago dice «¡ping!». La pared responde «¡pong!» tras contar 1 tiempo si está cerca y 3 tiempos si está lejos.</li>
+<li>El murciélago adivina «¡cerca!» o «¡lejos!» según lo rápido que respondió. Rotan los papeles.</li></ol></div>
+<div class="box"><h3>🔥 Juego: caliente y frío con el radar (15 min)</h3>
+<p>Un niño cierra los ojos y escucha el buzzer mientras otro acerca y aleja un libro frente al sensor. Pitidos rápidos = «¡caliente, cerca!»; lentos o silencio = «¡frío, lejos!». El niño adivina dónde está el libro. Rotan.</p></div>
+<div class="box fp"><h3>✏️ Ficha: Nombre <span class="line"></span></h3>
+<p>Colorea cada cuadro con el color de su cable:</p>
+<div class="wrap"><table><tr><th>Pata del sensor</th><th>Va a</th><th>Color</th></tr>
+<tr><td>VCC</td><td>5V</td><td><span class="sw"></span> rojo</td></tr>
+<tr><td>Trig</td><td>pin 9</td><td><span class="sw"></span> amarillo</td></tr>
+<tr><td>Echo</td><td>pin 8</td><td><span class="sw"></span> verde</td></tr>
+<tr><td>GND</td><td>GND</td><td><span class="sw"></span> negro</td></tr></table></div>
+<p style="margin-top:.6rem">Dibuja tu mano frente al sensor y las ondas del eco:</p><div class="draw"></div>
+<p>Cuando mi mano está cerca, el buzzer suena: &nbsp;[ &nbsp;] rápido &nbsp;&nbsp; [ &nbsp;] lento</p></div>
+</section>
+
+<section id="b" style="--c:#16a34a">
+<h2>🚀 7–9 años: Sensor de Reversa para Auto</h2>
+<div class="wrap"><table class="tl"><tr><th>Min</th><th>Actividad</th><th>Qué hacer</th></tr>
+<tr><td>0–10</td><td>⚽ Pelota rebotona</td><td>Ver abajo.</td></tr>
+<tr><td>10–25</td><td>🧠 Explicación</td><td>Ecolocalización, Trig y Echo, y por qué los autos pitan más rápido al acercarse a una pared.</td></tr>
+<tr><td>25–55</td><td>🛠️ Ensamble</td><td>Armar con la guía de pasos y cargar el programa.</td></tr>
+<tr><td>55–60</td><td>🤸 Pausa</td><td>Tomar agua.</td></tr>
+<tr><td>60–75</td><td>📏 Medición con regla</td><td>Poner un libro a 30, 20, 10 y 5 cm del sensor y anotar cómo suena el buzzer en la ficha.</td></tr>
+<tr><td>75–85</td><td>🚗 Concurso de estacionamiento</td><td>Ver abajo.</td></tr>
+<tr><td>85–90</td><td>🧹 Orden</td><td>Terminar la ficha y guardar.</td></tr></table></div>
+<div class="box"><h3>⚽ Calentamiento: pelota rebotona (10 min)</h3>
+<p><b>Para qué:</b> ver que el tiempo del rebote depende de la distancia. Material: una pelota que ruede y un cronómetro.</p>
+<ol><li>Marca una línea a 1 m de la pared y otra a 3 m.</li>
+<li>Rueda la pelota hacia la pared desde 1 m con la misma fuerza y mide cuánto tarda en volver.</li>
+<li>Repite desde 3 m. Tarda más en regresar.</li>
+<li>Conclusión: el sensor hace lo mismo con el sonido, pero tan rápido que solo el Arduino lo puede medir.</li></ol></div>
+<div class="box"><h3>🚗 Concurso de estacionamiento (10 min)</h3>
+<p>Un niño empuja una cajita (el «auto») hacia el sensor guiándose solo por el sonido, con los ojos puestos en otro lado. Debe detenerse sin chocar cuando el pitido sea casi continuo. Se mide con la regla cuánto faltaba. Gana quien se pare más cerca sin tocar.</p></div>
+<div class="box fp"><h3>✏️ Ficha: Nombre <span class="line"></span></h3>
+<div class="wrap"><table><tr><th>Distancia con regla</th><th>¿Cómo suena el buzzer?</th></tr>
+<tr><td>Más de 30 cm</td><td></td></tr><tr><td>20 cm</td><td></td></tr>
+<tr><td>10 cm</td><td></td></tr><tr><td>5 cm</td><td></td></tr></table></div>
+<p style="margin-top:.6rem">Mi mejor estacionamiento quedó a ______ cm de la pared.</p>
+<p>Si cubro con un dedo el «ojito» que escucha, ¿puede medir la distancia? ¿Por qué? <span class="line" style="width:100%"></span></p>
+<p>¿Por qué un objeto de tela a veces no se detecta bien? <span class="line" style="width:100%"></span></p></div>
+</section>
+
+<section id="c" style="--c:#9333ea">
+<h2>⚙️ 9–11 años: Del Tiempo a la Distancia</h2>
+<div class="wrap"><table class="tl"><tr><th>Min</th><th>Actividad</th><th>Qué hacer</th></tr>
+<tr><td>0–10</td><td>🧮 Calcula como murciélago</td><td>Ver abajo.</td></tr>
+<tr><td>10–25</td><td>🧠 Explicación</td><td>Velocidad del sonido, <code>pulseIn()</code>, tiempo de espera (timeout) y por qué se divide entre 2.</td></tr>
+<tr><td>25–50</td><td>🛠️ Ensamble y carga</td><td>Armar, subir el programa y abrir el Monitor Serie.</td></tr>
+<tr><td>50–55</td><td>🤸 Pausa</td><td>Tomar agua.</td></tr>
+<tr><td>55–75</td><td>🏆 Retos de código</td><td>Ver abajo.</td></tr>
+<tr><td>75–85</td><td>📝 Ficha técnica</td><td>Cálculos y preguntas de análisis.</td></tr>
+<tr><td>85–90</td><td>🧹 Orden</td><td>Limpieza y guardado.</td></tr></table></div>
+<div class="box"><h3>🧮 Calentamiento: calcula como murciélago (10 min)</h3>
+<ol><li>El sonido viaja a 340 m/s = 0,034 cm/µs. ¿Cuánto tarda en recorrer 20 cm? 20 ÷ 0,034 ≈ 588 µs.</li>
+<li>Un objeto a 10 cm: el sonido recorre 20 cm (ida y vuelta). ¿Por qué se divide entre 2? Porque el sensor mide el viaje completo y solo queremos la distancia hasta el objeto.</li>
+<li>Si el pulso Echo dura 1 176 µs, ¿a qué distancia está el objeto? 1176 × 0,034 ÷ 2 ≈ 20 cm.</li></ol></div>
+<div class="box"><h3>🏆 Retos de código (20 min)</h3>
+<ol><li><b>Reto 1 (precisión):</b> pon un libro a 10, 20 y 30 cm medidos con regla y compara con el Monitor Serie. Calcula el error.</li>
+<li><b>Reto 2 (alcance):</b> cambia <code>DIST_MAX</code> de 30 a 50 y observa qué cambia.</li>
+<li><b>Reto 3 (tonos):</b> haz que el tono sea 1000 Hz si <code>distancia &lt; 15</code> y 500 Hz si es mayor, usando <code>if / else</code>.</li>
+<li><b>Reto 4 (materiales):</b> compara las lecturas frente a un libro, un peluche y una hoja inclinada. ¿Cuál mide peor y por qué?</li></ol></div>
+<div class="box fp"><h3>✏️ Ficha: Nombre <span class="line"></span></h3>
+<pre>long duracion = pulseIn(ECHO, HIGH, 30000);
+float distancia = duracion * 0.034 / 2;</pre>
+<p><b>A)</b> ¿Por qué se divide entre 2? <span class="line" style="width:100%"></span></p>
+<p><b>B)</b> ¿Qué hace <code>pulseIn(ECHO, HIGH, 30000)</code>? ¿Y qué significa el 30000? <span class="line" style="width:100%"></span></p>
+<p><b>C)</b> Si Echo dura 588 µs, la distancia es ______ cm. Si el objeto está a 50 cm, el pulso dura ______ µs.</p>
+<p><b>D)</b> Escribe el <code>if / else</code> para que el buzzer suene a 1000 Hz si la distancia es menor a 15 cm y se apague si no:</p>
+<div class="draw"></div>
+<p style="margin-top:.6rem">Mis lecturas: libro a 10 cm → ____ &nbsp; a 20 cm → ____ &nbsp; a 30 cm → ____</p></div>
+</section>
+</main>
+<script>
+var btns=document.querySelectorAll('nav button'),secs=document.querySelectorAll('section');
+btns.forEach(function(b){b.onclick=function(){btns.forEach(function(x){x.classList.remove('on')});secs.forEach(function(s){s.classList.remove('on')});b.classList.add('on');document.getElementById(b.dataset.t).classList.add('on')}});
+</script>
+</body>
+</html>
